@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\profilecontroller;
 
@@ -14,4 +15,5 @@ use App\Http\Controllers\profilecontroller;
 |
 */
 
-Route::get('/', [profilecontroller::class, 'index']);
+// Route::get('/', [profilecontroller::class, 'index']);
+Route::get('/', [MenuController::class, 'index']);
