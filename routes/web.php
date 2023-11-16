@@ -14,4 +14,4 @@ use App\Http\Controllers\profilecontroller;
 |
 */
 
-Route::get('/', [profilecontroller::class, 'index']);
+Route::get('/profile', [profilecontroller::class, 'profile']);
