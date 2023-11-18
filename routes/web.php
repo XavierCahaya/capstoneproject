@@ -19,4 +19,7 @@ Route::get('/', function () {
     return view('layouts.main');
 });
 
-Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
+Route::prefix('user')->group(function () {
+    Route::get('/beranda', [profilecontroller::class, 'index'])->name('beranda');
+    Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
+});

@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     {{-- My Style --}}
-    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="{{ asset('css/navstyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <title>N'Jajan</title>
     <body>
