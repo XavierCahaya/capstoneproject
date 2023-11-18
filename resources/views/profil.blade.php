@@ -37,7 +37,7 @@
                 <h1>Keunggulan</h1>
             </div>
             <div class="row d-flex justify-content-center">
-                <div class="col-xxl-3 col-xl-3">
+                <div class="col-xxl-4 col-xl-4">
                     <div class="card">
                         <div class="card-body text-center" style="padding: 3rem">
                             <h5 class="card-title">Inovasi Rasa yang Menggoda</h5>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-xl-3 my-xxl-0 my-xl-0 my-md-4 my-4">
+                <div class="col-xxl-4 col-xl-4 my-xxl-0 my-xl-0 my-md-4 my-4">
                     <div class="card">
                         <div class="card-body text-center" style="padding: 3rem">
                             <h5 class="card-title">Pilihan Menu Beragam</h5>
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-xl-3">
+                <div class="col-xxl-4 col-xl-4">
                     <div class="card">
                         <div class="card-body text-center" style="padding: 3rem">
                             <h5 class="card-title">Pesan Online atau Ambil di Tempat</h5>

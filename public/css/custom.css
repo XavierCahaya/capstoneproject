@@ -1,6 +1,3 @@
-.container {
-    padding: 1rem 5%;
-}
 
 /* Profile Start */
 
@@ -19,7 +16,7 @@
 
 .keunggulan .title-keunggulan h1 {
     background-color: #fc3e24;
-    width: 220px;
+    width: 300px;
     padding: 1rem;
     color: #fff;
     font-weight: 700;

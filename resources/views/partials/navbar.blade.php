@@ -16,7 +16,7 @@
                     <a class="nav-link {{ request()->is('kategori') ? 'active' : '' }}" href="/kategori">Kategori</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('cekpesanan') ? 'active' : '' }}" href="{{ route('cekpesanan') }}">Cek Pesanan</a>
+                    <a class="nav-link {{ request()->is('user/cekpesanan') ? 'active' : '' }}" href="{{ route('cekpesanan') }}">Cek Pesanan</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
