@@ -26,3 +26,7 @@ Route::prefix('user')->group(function () {
     Route::get('/menu', [ProductController::class,'index'])->name('product');
     Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
 });
+
+Route::get('/admin', function(){
+    return view('admin/main');
+});
