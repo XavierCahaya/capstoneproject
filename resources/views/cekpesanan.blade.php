@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="cekpesanan d-flex align-items-center" style="min-height: 100vh">
-    <div class="content" style="width: 100%">
+<div class="cekpesanan d-flex align-items-center justify-content-center">
+    <div class="content">
         <div class="title-page text-center mb-5">
             <h1>Cek Pesanan</h1>
         </div>
