@@ -10,11 +10,7 @@
             N'Jajan
         </h5>
         <p style="text-align: justify">
-<<<<<<< HEAD
-            Rasakan pengalaman kuliner yang berbeda dengan menikmati cita rasa autentik dari nikmatnya mie dan segarnya minuman dari N'Jajan. Sedia makanan pedas peningkat mood dengan harga murah. Permudah dapatkan semua kenikmatan itu dengan memesan produk N'Jajan di website ini. <a href="/menu" style="color: #FC3E24; font-weight: bold;">Pesan Sekarang</a>
-=======
             Rasakan pengalaman kuliner yang berbeda dengan menikmati cita rasa autentik dari nikmatnya mie dan segarnya minuman dari N'Jajan. Sedia makanan pedas peningkat mood dengan harga murah. Permudah dapatkan semua kenikmatan itu dengan memesan produk N'Jajan di website ini. <br><a href="/menu" style="color: #FC3E24; font-weight: bold;">Pesan Sekarang</a>
->>>>>>> 591479acd6ae8c9c9067a887f9266a088bcc721a
         </p>
     </div>
     <div class="col-lg-3 col-md-6 mb-1 text-center">
@@ -24,10 +20,10 @@
                 <img src="{{ asset('image/wa.png')}}" alt="WhatsApp Logo" width="20" height="24" class="mr-2">
                 <a href="https://wa.me/6281235613796" style="color: #4f4f4f;text-decoration:none;">081235613796</a>
             </li>
-            {{-- <li class="mb-3">
+            <li class="mb-3">
                 <img src="image/facebook.png" alt="Facebook Logo" width="20" height="20" class="mr-2">
                 <a href="https://m.facebook.com/hanny.onny" target="_blank" style="color: #4f4f4f;">Facebook</a>
-            </li> --}}
+            </li>
             <li class="mb-3">
                 <a href="https://www.instagram.com/toreh_njajan/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==" target="_blank" style="color: #4f4f4f; text-decoration:none;">
                     <img src="{{ asset('image/instagram.png') }}" alt="Instagram Logo" width="20" height="20" class="mr-2"> toreh_njajan</a>

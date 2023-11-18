@@ -8,6 +8,6 @@ class profilecontroller extends Controller
 {
     public function index()
     {
-        return view('profil');
+        return view('profile');
     }
 }
