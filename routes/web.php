@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CekpesananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\profilecontroller;
 
@@ -14,4 +15,8 @@ use App\Http\Controllers\profilecontroller;
 |
 */
 
-Route::get('/profile', [profilecontroller::class, 'profile']);
+Route::get('/', function () {
+    return view('layouts.main');
+});
+
+Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
