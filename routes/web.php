@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\profilecontroller;
 
@@ -15,3 +17,7 @@ use App\Http\Controllers\profilecontroller;
 */
 
 Route::get('/', [profilecontroller::class, 'index']);
+
+Route::get('/login', [LoginController::class,'index'])->name('login');
+
+Route::get('/menu', [ProductController::class,'index'])->name('product');
