@@ -4,13 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+=======
+
+    {{-- Bootstrap Style --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+>>>>>>> 591479acd6ae8c9c9067a887f9266a088bcc721a
 
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     {{-- My Style --}}
+<<<<<<< HEAD
     <link rel="stylesheet" href="/css/style.css">
 
     {{-- Font Awesome --}}
@@ -24,14 +31,21 @@
 </head>
 
 <body>
+=======
+    <link rel="stylesheet" href="{{ asset('css/navstyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
-    @include('partials/navbar')
+    <title>N'Jajan</title>
+    <body>
+>>>>>>> 591479acd6ae8c9c9067a887f9266a088bcc721a
 
-    <div class="container mt-4">
-        @yield('container')
-    </div>
+      @include('partials/navbar')
 
-    @include('partials/footer')
+      <div class="container mt-4">
+          @yield('container')
+      </div>
+
+      @include('partials/footer')
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
