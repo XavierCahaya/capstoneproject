@@ -15,11 +15,8 @@ use App\Http\Controllers\profilecontroller;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.main');
-});
+Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
 
 Route::prefix('user')->group(function () {
-    Route::get('/beranda', [profilecontroller::class, 'index'])->name('beranda');
     Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
 });
