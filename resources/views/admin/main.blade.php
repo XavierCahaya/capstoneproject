@@ -13,17 +13,17 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <!-- BEGIN VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/vendors.css">
-    <link rel="stylesheet" type="text/css" href="theme-assets/vendors/css/charts/chartist.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme-assets/css/vendors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme-assets/vendors/css/charts/chartist.css') }}">
     <!-- END VENDOR CSS-->
     <!-- BEGIN CHAMELEON  CSS-->
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/app-lite.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme-assets/css/app-lite.css') }}">
     <!-- END CHAMELEON  CSS-->
     <!-- BEGIN Page Level CSS-->
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/pages/dashboard-ecommerce.css">
-    <link rel="stylesheet" type="text/css" href="theme-assets/fonts/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme-assets/css/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme-assets/css/pages/dashboard-ecommerce.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme-assets/fonts/line-awesome/css/line-awesome.min.css') }}">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
@@ -38,17 +38,17 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!-- BEGIN VENDOR JS-->
-    <script src="theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
+    <script src="{{ asset('theme-assets/vendors/js/vendors.min.js') }}" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
-    <script src="theme-assets/vendors/js/charts/chartist.min.js" type="text/javascript"></script>
+    <script src="{{ asset('theme-assets/vendors/js/charts/chartist.min.js') }}" type="text/javascript"></script>
     <!-- END PAGE VENDOR JS-->
     <!-- BEGIN CHAMELEON  JS-->
-    <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
-    <script src="theme-assets/js/core/app-lite.js" type="text/javascript"></script>
+    <script src="{{ asset('theme-assets/js/core/app-menu-lite.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('theme-assets/js/core/app-lite.js') }}" type="text/javascript"></script>
     <!-- END CHAMELEON  JS-->
     <!-- BEGIN PAGE LEVEL JS-->
-    <script src="theme-assets/js/scripts/pages/dashboard-lite.js" type="text/javascript"></script>
+    <script src="{{ asset('theme-assets/js/scripts/pages/dashboard-lite.js') }}" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
   </body>
 </html>
