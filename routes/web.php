@@ -28,5 +28,5 @@ Route::prefix('user')->group(function () {
 });
 
 Route::get('/admin', function(){
-    return view('admin/main');
+    return view('admin/orderIn');
 });
