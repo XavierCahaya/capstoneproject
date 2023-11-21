@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\OrderInController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CekpesananController;
 use App\Http\Controllers\profilecontroller;
 
 /*
@@ -14,4 +18,19 @@ use App\Http\Controllers\profilecontroller;
 |
 */
 
-Route::get('/profile', [profilecontroller::class, 'profile']);
+
+Route::get('/login', [LoginController::class,'index'])->name('login');
+
+Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
+
+Route::get('/admin', [OrderInController::class, 'index']);
+Route::get('/OrderIn', [OrderInController::class, 'index']);
+
+Route::prefix('user')->group(function () {
+    Route::get('/menu', [ProductController::class,'index'])->name('product');
+    Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
+});
+
+/* Route::get('/admin', function(){
+    return view('admin/layouts/main');
+}); */

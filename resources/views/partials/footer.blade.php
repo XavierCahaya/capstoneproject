@@ -3,30 +3,30 @@
 <div class="container p-4">
     <div class="row">
     <div class="d-flex col-lg-2 col-md-3 mb-1 justify-content-center align-items-center">
-        <img src="image/logo.png" alt="Logo" width="120" height="120">
+        <img src="{{ asset('image/logo.png') }}" alt="Logo" width="120" height="120">
     </div>
     <div class="col-lg-4 col-md-9 mb-1">
         <h5 class="mb-3" style="letter-spacing: 2px; color: #FC3E24;">
             N'Jajan
         </h5>
         <p style="text-align: justify">
-            Rasakan pengalaman kuliner yang berbeda dengan menikmati cita rasa autentik dari nikmatnya mie dan segarnya minuman dari N'Jajan. Sedia makanan pedas peningkat mood dengan harga murah. Permudah dapatkan semua kenikmatan itu dengan memesan produk N'Jajan di website ini. <a href="/menu" style="color: #FC3E24; font-weight: bold;">Pesan Sekarang</a>   
+            Rasakan pengalaman kuliner yang berbeda dengan menikmati cita rasa autentik dari nikmatnya mie dan segarnya minuman dari N'Jajan. Sedia makanan pedas peningkat mood dengan harga murah. Permudah dapatkan semua kenikmatan itu dengan memesan produk N'Jajan di website ini. <br><a href="/menu" style="color: #FC3E24; font-weight: bold;">Pesan Sekarang</a>
         </p>
     </div>
     <div class="col-lg-3 col-md-6 mb-1 text-center">
         <h5 class="mb-3" style="letter-spacing: 2px; color: #FC3E24;">Kontak</h5>
         <ul class="list-unstyled mb-0">
             <li class="mb-3">
-                <img src="image/wa.png" alt="WhatsApp Logo" width="20" height="24" class="mr-2">
+                <img src="{{ asset('image/wa.png')}}" alt="WhatsApp Logo" width="20" height="24" class="mr-2">
                 <a href="https://wa.me/6281235613796" style="color: #4f4f4f;text-decoration:none;">081235613796</a>
             </li>
             <li class="mb-3">
-                <img src="image/facebook.png" alt="Facebook Logo" width="20" height="20" class="mr-2">
-                <a href="https://m.facebook.com/hanny.onny" target="_blank" style="color: #4f4f4f;">Facebook</a>
+                <img src="{{ asset('image/facebook.png')}}" alt="Facebook Logo" width="20" height="20" class="mr-2">
+                <a href="https://m.facebook.com/hanny.onny" target="_blank" style="color: #4f4f4f;text-decoration:none;">Facebook</a>
             </li>
             <li class="mb-3">
                 <a href="https://www.instagram.com/toreh_njajan/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==" target="_blank" style="color: #4f4f4f; text-decoration:none;">
-                    <img src="image/instagram.png" alt="Instagram Logo" width="20" height="20" class="mr-2"> toreh_njajan</a>
+                    <img src="{{ asset('image/instagram.png') }}" alt="Instagram Logo" width="20" height="20" class="mr-2"> toreh_njajan</a>
             </li>
         </ul>
     </div>
@@ -49,7 +49,7 @@
                 <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
             </svg>
             <p style="color: rgba(252, 62, 36, 1); font-weight: 500; margin: 0px 5px; ">Depan kantor JNT Glenmore</p>
-        </div>        
+        </div>
     </div>
     </div>
 </div>

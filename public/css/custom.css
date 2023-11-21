@@ -1,0 +1,59 @@
+
+/* Profile Start */
+
+.profil .card {
+    background-color: #d9d9d9;
+    border: none;
+}
+
+.profil .title h1 {
+    font-weight: 700;
+}
+
+.profil .desc-umkm {
+    font-size: 1.3rem;
+}
+
+.keunggulan .title-keunggulan h1 {
+    background-color: #fc3e24;
+    width: 300px;
+    padding: 1rem;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.keunggulan .card {
+    background-color: #d9d9d9;
+    border: none;
+}
+
+.keunggulan .card .card-title {
+    font-size: 1.5rem;
+}
+
+.keunggulan .card .card-text {
+    text-align: justify;
+}
+
+/* Profile End */
+
+/* Menu Start */
+
+/* Menu End */
+
+/* Kategori Start */
+
+/* Kategori End */
+
+/* Cek Pesanan Start */
+
+.cekpesanan {
+    margin: 12rem 0rem;
+}
+
+/* Cek Pesanan ENd */
