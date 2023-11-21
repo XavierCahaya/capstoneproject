@@ -17,6 +17,16 @@ class OrderIn extends Model
         'status',
         'timestamp',
     ];
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'order_id');
+    }
+
+    public function getTotalItemsAttribute()
+    {
+        return $this->orderDetails()->sum('qty');
+    }
 }
 
 
