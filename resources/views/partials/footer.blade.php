@@ -21,8 +21,8 @@
                 <a href="https://wa.me/6281235613796" style="color: #4f4f4f;text-decoration:none;">081235613796</a>
             </li>
             <li class="mb-3">
-                <img src="image/facebook.png" alt="Facebook Logo" width="20" height="20" class="mr-2">
-                <a href="https://m.facebook.com/hanny.onny" target="_blank" style="color: #4f4f4f;">Facebook</a>
+                <img src="{{ asset('image/facebook.png')}}" alt="Facebook Logo" width="20" height="20" class="mr-2">
+                <a href="https://m.facebook.com/hanny.onny" target="_blank" style="color: #4f4f4f;text-decoration:none;">Facebook</a>
             </li>
             <li class="mb-3">
                 <a href="https://www.instagram.com/toreh_njajan/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==" target="_blank" style="color: #4f4f4f; text-decoration:none;">

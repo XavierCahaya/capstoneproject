@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&family=Roboto:wght@400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root{
+    --bg-color-first:#fff;
+    --bg-color-second:#e9edf1;
+    --bg-color-third:#3bc59a;
+    --bg-color-fourth:#FC3E24;
+
+    --text-color-first:#000;
+    --text-color-second:#3d3c3c;
+    --text-color-third:#3bc59a;
+    
+    --hover-text-color:#fff;
+
+    --bg-card-1:#ecd765;
+    --bg-card-2:#7f91f9;
+    --bg-card-3:#eec79c;
+    --bg-card-4:#cb84f9;
+
+    --more-and-less:#555;
+}
+
+/* variables dark mode */
+.body.dark--mode{
+    --bg-color-first:linear-gradient(to bottom right, #242424,#3d3d3d);
+    --bg-color-second:#202020;
+    
+
+    --text-color-first:#fff;
+    --text-color-second:#9b9a9a;
+    
+
+    --hover-text-color:#000;
+
+    --bg-card-1:linear-gradient(to bottom right, #242424, #3d381a);
+    --bg-card-2:linear-gradient(to bottom right, #242424, #2d3353);
+    --bg-card-3:linear-gradient(to bottom right, #242424, #4d3720);
+    --bg-card-4:linear-gradient(to bottom right, #242424, #4c325e);
+
+    --more-and-less:#3bc59a;
+}
+
+
+/* header */
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    height: 70px;
+    width: 100%;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    background: var(--bg-color-fourth);
+    color: var(--text-color-first);
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo i{
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+.logo h2{
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+}
+
+.logo span{
+    color: var(--text-color-third);
+    font-family: 'Oswald', sans-serif;
+}
+
+.header h1{
+    padding-top: 8px;
+}
+
+.header--items{
+    display: flex;
+    align-items: center;
+}
+
+.header--items i{
+    font-size: 1.3rem;
+    margin-right: 25px;
+    cursor: pointer;
+    color: var(--text-color-first);
+}
+
+.header--items i:hover{
+    color: var(--text-color-third);
+}
+
+.dark--theme--btn{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+i.moon{
+    display: block;
+    color: var(--text-color-third);
+}
+
+.body.dark--mode .moon{
+    display: none;
+}
+
+i.sun{
+    color: #ecd765;
+    display: none;
+}
+
+.body.dark--mode .sun{
+    display: block;
+}
+
+.profile{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.profile svg{
+    width: 40px;
+    height: 40px;
+}
+
+img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+.logout{
+    margin-left: 20px;
+}
+
+.logout a{
+    display: flex;
+    width: 50px;
+    align-items: center;
+}
+
+.logout--item{
+    color: var(--text-color-first);
+}
+
+.logout a span{
+    margin-right: 6px;
+    width: 0px;
+}
+
+
+/* main */
+.main{
+    position: relative;
+    height: calc(100vh - 70px); 
+}
+
+/* sidebar */
+
+.sidebar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    margin-top: 70px;
+    padding: 20px;
+    background: var(--bg-color-first);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 10;
+    transition: .3s;
+}
+
+.sidebar--items{
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar--items li , .sidebar--bottom--items li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.sidebar--items a, .sidebar--bottom--items a{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--text-color-first);
+}
+
+.sidebar--items a:hover,
+.sidebar--bottom--items a:hover{
+    background: var(--bg-color-fourth);
+    color: var(--hover-text-color);
+}
+
+a.active{
+    background: var(--bg-color-fourth);
+    color: var(--hover-text-color);
+}
+
+.icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.sidebar .icon{
+    margin-right: 20px;
+    font-size: 1.3rem;
+}
+
+.dropdown{
+    width: 40px;
+    height: 40px;
+}
+
+/* wrapper */
+.wrapper {
+    display: flex;
+    height: 100vh; /* Set the wrapper height to 100% of the viewport height */
+}
+
+/* main */
+.main {
+    display: flex;
+    flex: 1; /* Let the main section take the remaining width */
+}
+
+
+/* content */
+.content {
+    width: 100%;
+    margin-top: 70px;
+    padding: 20px; /* Add padding as needed */
+    overflow-y: auto; /* Add scrollbar if content overflows */
+}
+
+/* responsive starts here */
+@media screen and (max-width:2561px){
+    .sidebar{
+        z-index: 10;
+        width: 300px;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.activemenu{
+        transform: translateX(0);
+    }
+
+    .sidebar .icon{
+        margin-right: 20px;
+    }
+
+    .sidebar--item{
+        display: block;
+    }
+
+    .main--container{
+        width:100%;
+    }
+}
+
+@media screen and (max-width:1325px){
+    .sidebar{
+        z-index: 10;
+        width: 300px;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.activemenu{
+        transform: translateX(0);
+    }
+
+    .sidebar .icon{
+        margin-right: 20px;
+    }
+
+    .sidebar--item{
+        display: block;
+    }
+
+    .main--container{
+        width:100%;
+    }
+}
+
+@media screen and (max-width:775px){
+    .sidebar{
+        z-index: 10;
+        width: 300px;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.activemenu{
+        transform: translateX(0);
+    }
+
+    .sidebar .icon{
+        margin-right: 20px;
+
+    }
+    .sidebar--item{
+        display: block;
+    }
+    .main--container{
+        width:100%;
+    }
+}
+
+@media screen and (max-width:640px){
+    .sidebar{
+        padding: 10px;
+    }
+    .main--container{
+        padding: 10px;
+    }
+
+    .header--items i{
+        margin-right: 10px;
+    }
+    .header h2{
+        display: none;
+    }
+}

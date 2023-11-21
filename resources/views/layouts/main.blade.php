@@ -15,7 +15,6 @@
     crossorigin="anonymous" />
     {{-- My Style --}}
     <link rel="stylesheet" href="{{ asset('css/navstyle.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     
     <title>N'Jajan</title>
