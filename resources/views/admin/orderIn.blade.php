@@ -1,6 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
+
 <head>
     <style>
         h1 {
@@ -53,3 +54,5 @@
     </div>
     
 @endsection
+
+    
