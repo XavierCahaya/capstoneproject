@@ -35,16 +35,6 @@ Route::prefix('user')->group(function () {
     Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
 });
 
-<<<<<<< HEAD
-Route::get('/admin', function(){
-    return view('admin/main');
-});
-
 Route::get('category', [CategoryController::class, 'index'])->name('category.index');
 Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');
-=======
 
-/* Route::get('/admin', function(){
-    return view('admin/layouts/main');
-}); */
->>>>>>> 25bbb0beb72b9da5187e764a4ec8a9219e01a4ae
