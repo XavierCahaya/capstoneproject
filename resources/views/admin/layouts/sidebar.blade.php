@@ -19,7 +19,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('semua.menu') }}">
                 <span class="icon"><i class="ri-booklet-line"></i></span>
                 <div class="sidebar--item">Kelola Menu</div>
             </a>
@@ -48,4 +48,3 @@
     </ul>
 </div>
 
-    
