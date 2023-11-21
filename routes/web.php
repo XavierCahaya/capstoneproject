@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CekpesananController;
 use App\Http\Controllers\profilecontroller;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,6 @@ Route::prefix('user')->group(function () {
 Route::get('/admin', function(){
     return view('admin/main');
 });
+
+Route::get('category', [CategoryController::class, 'index'])->name('category.index');
+Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');
