@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CekpesananController;
 use App\Http\Controllers\profilecontroller;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Models\Category;
 
 /*
@@ -29,6 +30,7 @@ Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
 
 Route::prefix('user')->group(function () {
     Route::get('/menu', [ProductController::class,'index'])->name('product');
+    Route::post('/checkout', [OrderController::class,'checkout'])->name('checkout');
     Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
     Route::get('category', [CategoryController::class, 'user'])->name('category.index');
     Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');
