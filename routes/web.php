@@ -30,6 +30,8 @@ Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
 Route::prefix('user')->group(function () {
     Route::get('/menu', [ProductController::class,'index'])->name('product');
     Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
+    Route::get('category', [CategoryController::class, 'user'])->name('category.index');
+    Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');
 });
 
 Route::prefix('admin')->group(function () {

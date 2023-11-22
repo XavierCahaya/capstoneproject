@@ -78,4 +78,16 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->back();
     }
+
+    public function user(): View
+    {
+        $categories = Category::all();
+
+        return view('category.index', compact('categories'));
+    }
+
+    public function show(Category $category): View
+    {
+        return view('category.show', compact('category'));
+    }
 }
