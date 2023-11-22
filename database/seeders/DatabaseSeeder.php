@@ -33,47 +33,5 @@ class DatabaseSeeder extends Seeder
             'name' => 'Snack',
         ]);
 
-        Product::create([
-            'name' => 'Mie Jebew Ori',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, consequatur.',
-            'price' => 8000,
-            'category_id' => 2
-        ]);
-
-        Product::create([
-            'name' => 'Mie Jebew Komplit',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, consequatur.',
-            'price' => 10000,
-            'category_id' => 2
-        ]);
-
-        Product::create([
-            'name' => 'Es Mojito Mangga',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, consequatur.',
-            'price' => 5000,
-            'category_id' => 1
-        ]);
-
-        Product::create([
-            'name' => 'Es Mojito Melon',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, consequatur.',
-            'price' => 5000,
-            'category_id' => 1
-        ]);
-
-        Product::create([
-            'name' => 'Es Mojito Jeruk',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, consequatur.',
-            'price' => 5000,
-            'category_id' => 1
-        ]);
-
-        Product::create([
-            'name' => 'Es Mojito Anggur',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, consequatur.',
-            'price' => 5000,
-            'category_id' => 1
-        ]);
-
     }
 }

@@ -35,7 +35,7 @@
                 @foreach ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-8 my-2 d-flex justify-content-center">
                         <div class="card-product card" style="width: 12rem; border-radius:20px; min-width: 150px">
-                            <img src="/image/food.webp" class="card-img-top img-fluid" style="border-radius:20px 20px 0 0;"
+                            <img src="{{ asset('images/product/'. $product->image) }}" class="card-img-top img-fluid" style="border-radius:20px 20px 0 0;"
                                 alt="...">
                             <div class="card-body p-2">
                                 <div class="d-flex justify-content-around">

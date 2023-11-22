@@ -7,11 +7,13 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $products = Product::with('category')->get();
 
         return view('product', compact('products'));
 
     }
+
 }

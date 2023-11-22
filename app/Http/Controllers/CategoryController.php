@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -14,9 +15,8 @@ class CategoryController extends Controller
      */
     public function index(): View
     {
-        $categories = Category::all();
-
-        return view('category.index', compact('categories'));
+        $category = Category::all();
+        return view('admin.category.index', compact('category'));
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.form.create');
     }
 
     /**
@@ -32,15 +32,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category): View
-    {
-        return view('category.show', compact('category'));
+        $category = new Category();
+        $category->name = $request->input('name');
+        $category->save();
+
+        return redirect()->route('category.menu');
     }
 
     /**
@@ -48,15 +48,24 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.category.form.update', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category,string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->name = $request->input('name');
+        $category->update();
+
+        return redirect()->route('category.menu');
     }
 
     /**
@@ -64,6 +73,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // dd('oke');
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return redirect()->back();
     }
 }
