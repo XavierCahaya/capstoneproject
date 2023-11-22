@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CekpesananController;
 use App\Http\Controllers\profilecontroller;
 use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,14 +44,23 @@ Route::prefix('admin')->group(function () {
                 Route::get('/product/minuman', [AdminMenuController::class, 'minuman'])->name('minuman.menu');
                 Route::get('/product/snack', [AdminMenuController::class, 'snack'])->name('snack.menu');
             });
+            Route::get('/product/create', [AdminMenuController::class, 'create'])->name('form.create.product');
             Route::post('/product', [AdminMenuController::class, 'store'])->name('add.product');
+            Route::get('/product/update/{id}', [AdminMenuController::class, 'edit'])->name('form.update.product');
             Route::put('/product/{id}', [AdminMenuController::class, 'update'])->name('update.product');
-            Route::delete('/product/delete/{id}', [AdminMenuController::class, 'destroy'])->name('delete.product');
+            Route::get('/product/delete/{id}', [AdminMenuController::class, 'destroy'])->name('delete.product');
+        });
+
+        Route::prefix('category')->group(function () {
+            Route::get('/category', [CategoryController::class, 'index'])->name('category.menu');
+            Route::get('/category/create', [CategoryController::class, 'create'])->name('form.create.category');
+            Route::post('/category', [CategoryController::class, 'store'])->name('add.category');
+            Route::get('/category/update/{id}', [CategoryController::class, 'edit'])->name('form.update.category');
+            Route::put('/category/{id}', [CategoryController::class, 'update'])->name('update.category');
+            Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('delete.category');
         });
 
     });
 
 });
 
-Route::get('category', [CategoryController::class, 'index'])->name('category.index');
-Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');

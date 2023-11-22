@@ -6,8 +6,8 @@
     <div class="title-table h1 text-center">Data Produk</div>
 
     <div class="group-button mt-3">
-        <a href="{{ route('semua.menu') }}" class="btn btn btn-outline-primary mb-3 shadow-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Tambah
+        <a href="{{ route('form.create.product') }}" class="btn btn-outline-primary">
+            Tambah Data
         </a>
     </div>
 
@@ -34,7 +34,5 @@
         </div>
     </div>
 </div>
-
-@include('admin.product.modal.create')
 
 @endsection

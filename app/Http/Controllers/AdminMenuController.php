@@ -23,6 +23,7 @@ class AdminMenuController extends Controller
         $selectedCategory = "Makanan";
         $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
                             ->where('categories.name', $selectedCategory)
+                            ->select('products.*')
                             ->get();
         return view('admin.product.makanan.index', compact('category', 'products', 'selectedCategory'));
     }
@@ -49,6 +50,12 @@ class AdminMenuController extends Controller
 
     // Admin Start
 
+    public function create()
+    {
+        $category = Category::all();
+        return view('admin.product.form.create', compact('category'));
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -58,13 +65,6 @@ class AdminMenuController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
         ]);
-
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
 
         $products = new Product();
         $products->name = $request->input('name');
@@ -81,7 +81,14 @@ class AdminMenuController extends Controller
         $products->category_id = $request->input('category_id');
         $products->save();
 
-        return redirect()->back();
+        return redirect()->route('semua.menu');
+    }
+
+    public function edit($id)
+    {
+        $products = Product::findOrFail($id);
+        $category = Category::all();
+        return view('admin.product.form.update', compact('products', 'category'));
     }
 
     public function update(Request $request, Product $products, string $id)
@@ -93,13 +100,6 @@ class AdminMenuController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
         ]);
-
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
 
         $products = Product::findOrFail($id);
         $products->name = $request->input('name');
@@ -116,7 +116,7 @@ class AdminMenuController extends Controller
         $products->category_id = $request->input('category_id');
         $products->update();
 
-        return redirect()->back();
+        return redirect()->route('semua.menu');
     }
 
     public function destroy(string $id)

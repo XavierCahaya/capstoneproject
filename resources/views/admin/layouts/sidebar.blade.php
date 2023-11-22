@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('category.menu') }}">
                 <span class="icon"><i class="ri-health-book-line"></i></span>
                 <div class="sidebar--item">Kelola Kategori</div>
             </a>
