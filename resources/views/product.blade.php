@@ -39,7 +39,8 @@
                                 alt="...">
                             <div class="card-body p-2">
                                 <div class="d-flex justify-content-around">
-                                    <h5 class="card-title p-2" style="font-size: 15px">Rp {{ number_format($product->price, 0, ',', '.') }}</h5>
+                                    <h5 class="card-title p-2" style="font-size: 15px">Rp
+                                        {{ number_format($product->price, 0, ',', '.') }}</h5>
                                     <h6 class="card-title p-2"
                                         style="background-color:#D4DF52; border-radius:10px; font-size:.9em;">
                                         {{ $product->category->name }}</h6>
@@ -83,15 +84,94 @@
                     <p class="font-weight-bold mb-0">Total Price: <span id="total-price" class="text-success">0</span>
                     </p>
                 </div>
-                <div>
-                    <button class="btn btn-primary" id="checkout-btn">Checkout</button>
-                </div>
             </div>
+
+            <form action="{{ route('checkout') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="delivery-option" class="form-label">Delivery Option</label>
+                    <select class="form-select" id="delivery-option">
+                        <option value="dine-in">Dine In</option>
+                        <option value="delivery">Delivery</option>
+                    </select>
+                </div>
+
+                <div id="dine-in-fields">
+                    <div class="mb-3">
+                        <label for="orderer_name_dine_in" class="form-label">Orderer Name</label>
+                        <input type="text" class="form-control" id="orderer_name_dine_in" name="orderer_name" required>
+                    </div>
+                </div>
+
+                <div id="delivery-fields" style="display: none;">
+                    <div class="mb-3">
+                        <label for="orderer_name_delivery" class="form-label">Orderer Name</label>
+                        <input type="text" class="form-control" id="orderer_name_delivery" name="orderer_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" name="address"></textarea>
+                    </div>
+                </div>
+
+                <input type="hidden" name="productId" id="productId">
+                <input type="hidden" name="qty" id="qty">
+                <input type="hidden" name="amount" id="amount">
+
+                <button type="submit" class="btn btn-success mb-4" id="checkout-btn">Checkout</button>
+            </form>
+
         </div>
     </div>
 
-
     <script>
+        let arrayproductId = []
+        let arrayqty = []
+        let arrayamount = []
+
+        let productInputId = document.getElementById('productId')
+        let productInputqty = document.getElementById('qty')
+        let productInputamount = document.getElementById('amount')
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var deliveryOption = document.getElementById('delivery-option');
+            var dineInFields = document.getElementById('dine-in-fields');
+            var deliveryFields = document.getElementById('delivery-fields');
+
+            // Ganti referensi elemen 'orderer_name' berdasarkan pilihan pengiriman
+            var ordererNameDineIn = document.getElementById('orderer_name_dine_in');
+            var ordererNameDelivery = document.getElementById('orderer_name_delivery');
+            var phone = document.getElementById('phone');
+            var address = document.getElementById('address');
+
+            deliveryOption.addEventListener('change', function() {
+                if (deliveryOption.value === 'dine-in') {
+                    dineInFields.style.display = 'block';
+                    deliveryFields.style.display = 'none';
+
+                    // Gunakan elemen 'orderer_name_dine_in'
+                    ordererNameDineIn.required = true;
+                    ordererNameDelivery.required = false;
+                    phone.required = false;
+                    address.required = false;
+                } else {
+                    dineInFields.style.display = 'none';
+                    deliveryFields.style.display = 'block';
+
+                    // Gunakan elemen 'orderer_name_delivery'
+                    ordererNameDineIn.required = false;
+                    ordererNameDelivery.required = true;
+                    phone.required = true;
+                    address.required = true;
+                }
+            });
+
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             var addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
             var tableBody = document.querySelector('.table tbody');
@@ -104,8 +184,10 @@
                     var productName = this.closest('.card-body').querySelector('.card-text')
                         .textContent;
                     var productPrice = parseFloat(this.getAttribute('data-product-price'));
+                    var qty = 1;
+                    var amount = productPrice * qty;
 
-                    // Check if the product is already in the cart
+
                     var existingRow = tableBody.querySelector(`tr[data-product-id="${productId}"]`);
                     if (existingRow) {
                         var quantityElement = existingRow.querySelector('.quantity');
@@ -114,27 +196,50 @@
                         quantityElement.textContent = quantity;
 
                         var totalElement = existingRow.querySelector('.total');
-                        totalElement.textContent = (productPrice * quantity).toLocaleString('id-ID', { minimumFractionDigits: 2 });
+                        totalElement.textContent = (productPrice * quantity).toLocaleString(
+                            'id-ID', {
+                                minimumFractionDigits: 2
+                            });
+
                     } else {
+
+                        arrayproductId.push(productId);
+                        arrayqty.push(qty);
+                        arrayamount.push(amount);
+
+                        productInputId.value = arrayproductId.join(',');
+                        productInputqty.value = arrayqty.join(',');
+                        productInputamount.value = arrayamount.join(',');
+
+                        // arrayproductId[arrayproductId.length] = productId
+                        // arrayqty[arrayqty.length] = qty
+                        // arrayamount[arrayamount.length] = amount
+
+                        // productInputId.value = arrayproductId
+                        // productInputqty.value = arrayqty
+                        // productInputamount.value = arrayamount
+
                         var newRow = `
-                    <tr data-product-id="${productId}" data-product-price="${productPrice}">
-                        <th scope="row">${tableBody.children.length + 1}</th>
-                        <td>${productName}</td>
-                        <td>
-                            <button class="btn btn-sm btn-decrease p-1">-</button>
-                            <span class="quantity">1</span>
-                            <button class="btn btn-sm btn-increase p-1">+</button>
-                        </td>
-                        <td>${productPrice.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</td>
-                        <td class="total">${productPrice.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</td>
-                        <td>
-                            <button class="btn btn-sm btn-remove">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                <path id="removeIcon" d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                </svg>
-                            </button>
-                        </td>
-                    </tr>
+
+                        <tr data-product-id="${productId}" data-product-price="${productPrice}">
+                            <th scope="row">${tableBody.children.length + 1}</th>
+                            <td>${productName}</td>
+                            <td>
+                                <button class="btn btn-sm btn-decrease p-1">-</button>
+                                <span class="quantity">1</span>
+                                <button class="btn btn-sm btn-increase p-1">+</button>
+                            </td>
+                            <td>${productPrice.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</td>
+                            <td class="total">${productPrice.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</td>
+                            <td>
+                                <button class="btn btn-sm btn-remove">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                    <path id="removeIcon" d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
                 `;
 
                         tableBody.innerHTML += newRow;
@@ -162,10 +267,14 @@
                     }
 
                     quantityElement.textContent = quantity;
-                    totalElement.textContent = (productPrice * quantity).toLocaleString('id-ID', { minimumFractionDigits: 2 });
+                    totalElement.textContent = (productPrice * quantity).toLocaleString(
+                        'id-ID', {
+                            minimumFractionDigits: 2
+                        });
 
                     updateTotal();
-                } else if (target.classList.contains('btn-remove') || target.closest('.btn-remove')) {
+                } else if (target.classList.contains('btn-remove') || target.closest(
+                        '.btn-remove')) {
                     var row = target.closest('tr');
                     if (target.classList.contains('btn-remove')) {
                         row.remove();
@@ -185,6 +294,7 @@
 
                 totalPriceElement.textContent = 'Rp ' + grandTotal + '.000,00';
             }
+
         });
     </script>
 @endsection
