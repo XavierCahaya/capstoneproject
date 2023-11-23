@@ -1,20 +1,20 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminMenuController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PromoController;
+use App\Http\Controllers\OrderInController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CekpesananController;
 use App\Http\Controllers\profilecontroller;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\OrderInController;
-use App\Http\Controllers\OrderProcessController;
+use App\Http\Controllers\AdminMenuController;
+use App\Http\Controllers\CekpesananController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\OrderProcessController;
 use App\Http\Controllers\OrderCompleteController;
-
-use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +32,6 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', [LoginController::class,'login'])->name('login.action');
     Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 });
-
 
 Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
 Route::get('/admin', [OrderInController::class, 'index']);
@@ -53,7 +52,6 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     Route::prefix('cms')->group(function () {
-
         Route::prefix('product')->group(function () {
             Route::prefix('sub-product')->group(function () {
                 Route::get('/product', [AdminMenuController::class, 'semua'])->name('semua.menu');
@@ -79,5 +77,13 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
 
     });
 
-});
+    Route::prefix('promo')->group(function () {
+            Route::get('/index', [PromoController::class, 'index'])->name('semua.promo');
+            Route::get('/promo/create', [PromoController::class, 'create'])->name('form.create.promo');
+            Route::post('/promo', [PromoController::class, 'store'])->name('add.promo');
+            Route::get('/promo/update/{id}', [PromoController::class, 'edit'])->name('form.update.promo');
+            Route::put('/promo/{id}', [PromoController::class, 'update'])->name('update.promo');
+            Route::get('/promo/delete/{id}', [PromoController::class, 'destroy'])->name('delete.promo');
+        });
 
+});

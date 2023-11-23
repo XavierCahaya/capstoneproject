@@ -3,9 +3,13 @@
 @section('container')
     <div id="promo" class="carousel slide mb-4" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="/image/promoo.jpg" class="d-block w-100" alt="...">
-            </div>
+            @foreach ($promos as $key => $promo)
+                <div class="carousel-item {{ $key == 1 ? 'active':'' }}">
+                    @if($promo->image)
+                        <img src="{{ asset('images/promo/' . $promo->image) }}" class="d-block w-100" alt="Promo Image">
+                    @endif
+                </div>  
+            @endforeach
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#promo" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

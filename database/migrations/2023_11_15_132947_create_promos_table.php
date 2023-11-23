@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('promos', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
+            $table->string('title');
+            $table->string('image');
+            $table->tinyInteger('status')->default('0')->comment('0=hidden,1=visible');
             $table->timestamps();
         });
     }
