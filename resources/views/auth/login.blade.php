@@ -37,16 +37,28 @@
                         <h2>Hello, Admin!</h2>
                         <p>We are happy to have you back</p>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username">
-                    </div>
-                    <div class="input-group mb-5">
-                        <input type="password" class="form-control form-control-lg bg-light fs-6"
-                            placeholder="Password">
-                    </div>
-                    <div class="input-group mb-3">
-                        <button class="btn btn-lg w-100 fs-6 text-white">Login</button>
-                    </div>
+                    <form method="POST" action="{{ route('login.action') }}">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="input-group mb-5">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-lg w-100 fs-6 text-white mb-3">Login</button>
+                    </form>
                 </div>
             </div>
         </div>

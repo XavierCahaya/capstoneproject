@@ -27,8 +27,12 @@ use App\Models\Category;
 |
 */
 
+Route::prefix('auth')->group(function () {
+    Route::get('/login', [LoginController::class,'index'])->name('login');
+    Route::post('/login', [LoginController::class,'login'])->name('login.action');
+    Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+});
 
-Route::get('/login', [LoginController::class,'index'])->name('login');
 
 Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
 Route::get('/admin', [OrderInController::class, 'index']);
@@ -45,7 +49,7 @@ Route::prefix('user')->group(function () {
     Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');
 });
 
-Route::prefix('admin')->group(function () {
+Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     Route::prefix('cms')->group(function () {
