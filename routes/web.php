@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminMenuController;
-use App\Http\Controllers\OrderInController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
@@ -10,6 +9,11 @@ use App\Http\Controllers\CekpesananController;
 use App\Http\Controllers\profilecontroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderInController;
+use App\Http\Controllers\OrderProcessController;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\OrderCompleteController;
+
 use App\Models\Category;
 
 /*
@@ -27,6 +31,11 @@ use App\Models\Category;
 Route::get('/login', [LoginController::class,'index'])->name('login');
 
 Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
+Route::get('/admin', [OrderInController::class, 'index']);
+Route::get('/OrderIn', [OrderInController::class, 'index']);
+Route::get('/OrderProcess', [OrderProcessController::class, 'index']);
+Route::get('/OrderDetail', [OrderDetailController::class, 'index']);
+Route::get('/OrderComplete', [OrderCompleteController::class, 'index']);
 
 Route::prefix('user')->group(function () {
     Route::get('/menu', [ProductController::class,'index'])->name('product');

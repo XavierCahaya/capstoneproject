@@ -20,7 +20,7 @@
 <div class="container mt-4 table-container">
     <div class="card">
         <div class="table-responsive">
-        <h4 class="card-title">Pesanan Masuk</h4>
+        <h4 class="card-title">Pesanan Selesai</h4>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -28,8 +28,7 @@
                         <th>Waktu Pemesanan</th>
                         <th>Nama</th>
                         <th>Nama Produk</th>
-                        <th>Jumlah Item</th>
-                        <th>Action</th>
+                        <th>Total Harga</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,10 +39,6 @@
                             <td>{{ $order->orderer_name }}</td>
                             <td>{{ $order->orderer_name }}</td>
                             <td>{{ $order->getTotalItemsAttribute() }}</td>
-                            <td>
-                                <button class="btn btn-danger">Tolak</button>
-                                <button class="btn btn-success">Terima</button>
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>

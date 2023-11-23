@@ -7,25 +7,25 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="OrderProcess">
                 <span class="icon"><i class="ri-time-line"></i></span>
                 <div class="sidebar--item">Pesanan Diproses</div>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="OrderComplete">
                 <span class="icon"><i class="ri-checkbox-circle-line"></i></span>
                 <div class="sidebar--item">Pesanan Selesai</div>
             </a>
         </li>
         <li>
-            <a href="{{ route('semua.menu') }}">
+            <a href="#">
                 <span class="icon"><i class="ri-booklet-line"></i></span>
                 <div class="sidebar--item">Kelola Menu</div>
             </a>
         </li>
         <li>
-            <a href="{{ route('category.menu') }}">
+            <a href="#">
                 <span class="icon"><i class="ri-health-book-line"></i></span>
                 <div class="sidebar--item">Kelola Kategori</div>
             </a>
@@ -48,3 +48,4 @@
     </ul>
 </div>
 
+    

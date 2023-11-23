@@ -20,11 +20,11 @@
                     <label for="image">Gambar</label>
                     <input type="file" name="image" id="image" class="form-control">
                     @if ( $products->image )
-                        <input type="hidden" name="image" id="image" class="form-control" value="{{ 'image', $products->image }}">
+                    <input type="hidden" name="image" id="image" class="form-control" value="{{ $products->image }}">
                         <p>Gambar : {{ $products->image }}</p>
                     @endif
                 </div>
-
+                
                 <div class="form-group mb-3">
                     <label for="category_id">Kategori</label>
                     <select name="category_id" id="category_id" class="form-control" required>
