@@ -24,13 +24,15 @@
                         <p>Gambar : {{ $products->image }}</p>
                     @endif
                 </div>
-                
+
                 <div class="form-group mb-3">
                     <label for="category_id">Kategori</label>
                     <select name="category_id" id="category_id" class="form-control" required>
                         <option value="">Select Category</option>
-                        @foreach($category as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @foreach($category as $cat)
+                            <option value="{{ $cat->id }}" {{ old('category_id', $products->category_id) == $cat->id ? 'selected' : '' }}>
+                                {{ $cat->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
