@@ -13,56 +13,62 @@ class OrderController extends Controller
     public function checkout(Request $request)
     {
 
-        // dd($request->all());
+        $arrayId = json_decode($request->input('array_id'));
+        $arrayName = json_decode($request->input('array_name'));
+        $arrayQty = json_decode($request->input('array_qty'));
+        $arraySubtotal = json_decode($request->input('array_subtotal'));
 
-        $request->validate([
-            'orderer_name' => 'required',
-            'phone' => 'required_if:delivery-option,delivery', // Only required for delivery
-            'address' => 'required_if:delivery-option,delivery', // Only required for delivery
-            'productId' => 'required',
-            'qty' => 'required',
-            'amount' => 'required',
-        ]);
+        $deliveryOption = $request->input('delivery-option');
+        $phone = null;
+        $address = null;
 
-        // Start a database transaction
-        DB::beginTransaction();
-
-        try {
-            // Create a new order record
-            $order = Order::create([
-                'orderer_name' => $request->input('orderer_name'),
-                'phone' => $request->input('phone'),
-                'address' => $request->input('address'),
-                'status' => 'not success', // You may set a default status here
-            ]);
-
-            // Extract product IDs, quantities, and amounts from the form data
-            $productIds = explode(',', $request->input('productId'));
-            $quantities = explode(',', $request->input('qty'));
-            $amounts = explode(',', $request->input('amount'));
-
-            // Loop through the products and create order details records
-            foreach ($productIds as $key => $productId) {
-                OrderDetail::create([
-                    'order_id' => $order->id,
-                    'product_id' => $productId,
-                    'qty' => $quantities[$key],
-                    'total_price' => $amounts[$key],
-                ]);
-            }
-
-            // Commit the transaction
-            DB::commit();
-
-            // Redirect or respond with a success message
-            return redirect()->route('success-page')->with('success', 'Order placed successfully');
-        } catch (\Exception $e) {
-            // An error occurred, rollback the transaction
-            DB::rollBack();
-
-            // Log the error or handle it appropriately
-            return redirect()->back()->with('error', 'Error processing the order. Please try again.');
+        // Memeriksa nilai 'delivery-option'
+        if ($deliveryOption == 'delivery') {
+            // Jika 'delivery-option' adalah 'delivery', isi 'phone' dan 'address' dari request
+            $phone = $request->input('phone');
+            $address = $request->input('address');
         }
+
+        // Create a new order
+        $order = Order::create([
+            'delivery-option' => $deliveryOption,
+            'orderer_name' => $request->input('orderer_name'),
+            'phone' => $phone,
+            'address' => $address,
+            'total_price' => number_format(floatval($request->input('total_price')), 2, '.', '') * 1000,
+            'status' => 'success', // Default status
+        ]);
+        
+        // Attach order details to the order
+        $orderDetails = $this->createOrderDetails(
+            $order->id, 
+            $arrayId, 
+            $arrayName, 
+            $arrayQty, 
+            $arraySubtotal);
+
+        $order->orderDetails()->saveMany($orderDetails);
+
+        // Redirect or respond as needed
+        return redirect()->route('product')->with('message', 'Pemesanan Berhasil, silahkan cek pesanan anda pada halaman "Cek Pesanan"'); 
+    }
+
+    private function createOrderDetails($orderId, $arrayId, $arrayName, $arrayQty, $arraySubtotal)
+    {
+        $orderDetails = [];
+
+        // Create order details
+        foreach ($arrayId as $key => $productId) {
+            $orderDetails[] = new OrderDetail([
+                'order_id' => $orderId,
+                'product_id' => $productId,
+                'name' => $arrayName[$key],
+                'qty' => $arrayQty[$key],
+                'subtotal' => number_format(floatval($arraySubtotal[$key]), 2, '.', '') * 1000,
+            ]);
+        }
+
+        return $orderDetails;
     }
 
     /**

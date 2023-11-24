@@ -38,23 +38,22 @@
             <div class="row row-cols-md-2 row-cols-sm-1">
                 @foreach ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-8 my-2 d-flex justify-content-center">
-                        <div class="card-product card" style="width: 12rem; border-radius:20px; min-width: 150px">
-                            <img src="{{ asset('images/product/'. $product->image) }}" class="card-img-top img-fluid" style="border-radius:20px 20px 0 0;"
-                                alt="...">
+                        <div class="card-product card">
+                            <img src="{{ asset('images/product/'. $product->image) }}" class="card-img-top img-fluid" alt="ProdukImage">
                             <div class="card-body p-2">
-                                <div class="d-flex justify-content-around">
-                                    <h5 class="card-title p-2" style="font-size: 15px">Rp
+                                <div class="d-flex midleinfo">
+                                    <h5 class="card-title p-2">Rp
                                         {{ number_format($product->price, 0, ',', '.') }}</h5>
-                                    <h6 class="card-title p-2"
-                                        style="background-color:#D4DF52; border-radius:10px; font-size:.9em;">
+                                    <h6 class="card-title"
+                                        style="background-color:#D4DF52; border-radius:10px;">
                                         {{ $product->category->name }}</h6>
                                 </div>
                                 <p class="card-text text-center" style="font-size: 15px">{{ $product->name }}</p>
                                 <div class="card-btn d-flex justify-content-between align-items-center">
-                                    <a href="#" class="btn btn-detail px-2 py-2"
+                                    <a href="#" class="btn btn-detail"
                                         style="background-color:#1FD8CD; border-radius:10px; font-size:.8em;">Lihat
                                         Detail</a>
-                                    <a href="#" class="btn btn-pesan btn-add-to-cart text-light px-3 py-3"
+                                    <a href="#" class="btn btn-pesan btn-add-to-cart text-light"
                                         data-product-id="{{ $product->id }}" data-product-price="{{ $product->price }}"
                                         style="background-color:#0cc22a; border-radius:10px; font-size:1em;">Pesan</a>
                                 </div>
@@ -66,7 +65,7 @@
         </div>
         <div class="col-lg-6">
             <div class="table-responsive">
-                <table class="table table-striped table-hover text-center">
+                <table class="table table-striped table-hover text-center" id="cartTable">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">No</th>
@@ -85,146 +84,107 @@
 
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <p class="font-weight-bold mb-0">Total Price: <span id="total-price" class="text-success">0</span>
+                    <p class="font-weight-bold mb-0">Total Harga: <span id="total-price" class="text-success">0</span>
                     </p>
                 </div>
             </div>
 
-            <form action="{{ route('checkout') }}" method="POST">
+            <form action="{{ route('checkout') }}" method="POST" onsubmit="prepareFormData()">
                 @csrf
                 <div class="mb-3">
-                    <label for="delivery-option" class="form-label">Delivery Option</label>
-                    <select class="form-select" id="delivery-option">
+                    <label for="delivery-option" class="form-label">Opsi Pesanan</label>
+                    <select class="form-select" id="delivery-option" name="delivery-option">
                         <option value="dine-in">Dine In</option>
                         <option value="delivery">Delivery</option>
                     </select>
-                </div>
+                </div>  
 
-                <div id="dine-in-fields">
-                    <div class="mb-3">
-                        <label for="orderer_name_dine_in" class="form-label">Orderer Name</label>
-                        <input type="text" class="form-control" id="orderer_name_dine_in" name="orderer_name" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="orderer_name" class="form-label">Nama Pesanan</label>
+                    <input type="text" class="form-control" id="orderer_name" name="orderer_name" required>
                 </div>
 
                 <div id="delivery-fields" style="display: none;">
                     <div class="mb-3">
-                        <label for="orderer_name_delivery" class="form-label">Orderer Name</label>
-                        <input type="text" class="form-control" id="orderer_name_delivery" name="orderer_name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Phone</label>
+                        <label for="phone" class="form-label">No Hp</label>
                         <input type="text" class="form-control" id="phone" name="phone">
                     </div>
                     <div class="mb-3">
-                        <label for="address" class="form-label">Address</label>
+                        <label for="address" class="form-label">Alamat</label>
                         <textarea class="form-control" id="address" name="address"></textarea>
                     </div>
                 </div>
-
-                <input type="hidden" name="productId" id="productId">
-                <input type="hidden" name="qty" id="qty">
-                <input type="hidden" name="amount" id="amount">
+                <input type="hidden" name="total_price" id="total_price">
+        
+                <input type="hidden" name="array_id" id="array_id" value="">
+                <input type="hidden" name="array_name" id="array_name" value="">
+                <input type="hidden" name="array_qty" id="array_qty" value="">
+                <input type="hidden" name="array_subtotal" id="array_subtotal" value="">
 
                 <button type="submit" class="btn btn-success mb-4" id="checkout-btn">Checkout</button>
+                @if (session('message'))
+                    <div class="alert alert-success">{{ session('message') }}</div>
+                @endif
             </form>
-
         </div>
     </div>
 
     <script>
-        let arrayproductId = []
-        let arrayqty = []
-        let arrayamount = []
 
-        let productInputId = document.getElementById('productId')
-        let productInputqty = document.getElementById('qty')
-        let productInputamount = document.getElementById('amount')
-
+        // --- Logic Tampilan Pilihan Opsi Pemesanan ---
         document.addEventListener('DOMContentLoaded', function() {
-            var deliveryOption = document.getElementById('delivery-option');
-            var dineInFields = document.getElementById('dine-in-fields');
-            var deliveryFields = document.getElementById('delivery-fields');
-
-            // Ganti referensi elemen 'orderer_name' berdasarkan pilihan pengiriman
-            var ordererNameDineIn = document.getElementById('orderer_name_dine_in');
-            var ordererNameDelivery = document.getElementById('orderer_name_delivery');
-            var phone = document.getElementById('phone');
-            var address = document.getElementById('address');
+            let deliveryOption = document.getElementById('delivery-option');
+            let deliveryFields = document.getElementById('delivery-fields');    
+            let phone = document.getElementById('phone');
+            let address = document.getElementById('address');
 
             deliveryOption.addEventListener('change', function() {
-                if (deliveryOption.value === 'dine-in') {
-                    dineInFields.style.display = 'block';
-                    deliveryFields.style.display = 'none';
-
-                    // Gunakan elemen 'orderer_name_dine_in'
-                    ordererNameDineIn.required = true;
-                    ordererNameDelivery.required = false;
-                    phone.required = false;
-                    address.required = false;
-                } else {
-                    dineInFields.style.display = 'none';
+                if (deliveryOption.value === 'delivery') {
                     deliveryFields.style.display = 'block';
-
-                    // Gunakan elemen 'orderer_name_delivery'
-                    ordererNameDineIn.required = false;
-                    ordererNameDelivery.required = true;
                     phone.required = true;
                     address.required = true;
+                }else{
+                    deliveryFields.style.display = 'none';
+                    phone.required = false;
+                    address.required = false;
                 }
             });
-
         });
 
+        // --- Logic mindahin menu yg dipilih, menuju cart ---
         document.addEventListener('DOMContentLoaded', function() {
-            var addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
-            var tableBody = document.querySelector('.table tbody');
-            var totalPriceElement = document.getElementById('total-price');
+            let addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+            let tableBody = document.querySelector('.table tbody');
+            let totalPriceElement = document.getElementById('total-price');
 
             addToCartButtons.forEach(function(button) {
                 button.addEventListener('click', function(event) {
                     event.preventDefault();
-                    var productId = this.getAttribute('data-product-id');
-                    var productName = this.closest('.card-body').querySelector('.card-text')
+                    let productId = this.getAttribute('data-product-id');
+                    let productName = this.closest('.card-body').querySelector('.card-text')
                         .textContent;
-                    var productPrice = parseFloat(this.getAttribute('data-product-price'));
-                    var qty = 1;
-                    var amount = productPrice * qty;
+                    let productPrice = parseFloat(this.getAttribute('data-product-price'));
+                    let qty = 1;
+                    let amount = productPrice * qty;
 
-
-                    var existingRow = tableBody.querySelector(`tr[data-product-id="${productId}"]`);
+                    // --- Logic ketika ada item yg sama pada cart, 
+                    // Jika ada item yang sama maka tambah quantity ---
+                    let existingRow = tableBody.querySelector(`tr[data-product-id="${productId}"]`);
                     if (existingRow) {
-                        var quantityElement = existingRow.querySelector('.quantity');
-                        var quantity = parseInt(quantityElement.textContent);
+                        let quantityElement = existingRow.querySelector('.quantity');
+                        let quantity = parseInt(quantityElement.textContent);
                         quantity++;
                         quantityElement.textContent = quantity;
 
-                        var totalElement = existingRow.querySelector('.total');
+                        let totalElement = existingRow.querySelector('.total');
                         totalElement.textContent = (productPrice * quantity).toLocaleString(
                             'id-ID', {
                                 minimumFractionDigits: 2
                             });
-
+                    
+                    // Jika tidak ada, maka tambah row baru ke cart
                     } else {
-
-                        arrayproductId.push(productId);
-                        arrayqty.push(qty);
-                        arrayamount.push(amount);
-
-                        productInputId.value = arrayproductId.join(',');
-                        productInputqty.value = arrayqty.join(',');
-                        productInputamount.value = arrayamount.join(',');
-
-                        // arrayproductId[arrayproductId.length] = productId
-                        // arrayqty[arrayqty.length] = qty
-                        // arrayamount[arrayamount.length] = amount
-
-                        // productInputId.value = arrayproductId
-                        // productInputqty.value = arrayqty
-                        // productInputamount.value = arrayamount
-
-                        var newRow = `
-
+                        let newRow = `
                         <tr data-product-id="${productId}" data-product-price="${productPrice}">
                             <th scope="row">${tableBody.children.length + 1}</th>
                             <td>${productName}</td>
@@ -242,27 +202,27 @@
                                     </svg>
                                 </button>
                             </td>
-                        </tr>
-
-                `;
+                        </tr>`;
 
                         tableBody.innerHTML += newRow;
                     }
-
                     updateTotal();
+                    prepareFormData();
                 });
             });
 
+            // --- Kumpulan logic action button pada tiap row cart ---
             tableBody.addEventListener('click', function(event) {
-                var target = event.target;
+                let target = event.target;
 
+                // --- Increase & Decrease qty Logic ---
                 if (target.classList.contains('btn-increase') || target.classList.contains(
                         'btn-decrease')) {
-                    var row = target.closest('tr');
-                    var quantityElement = row.querySelector('.quantity');
-                    var totalElement = row.querySelector('.total');
-                    var productPrice = parseFloat(row.getAttribute('data-product-price'));
-                    var quantity = parseInt(quantityElement.textContent);
+                    let row = target.closest('tr');
+                    let quantityElement = row.querySelector('.quantity');
+                    let totalElement = row.querySelector('.total');
+                    let productPrice = parseFloat(row.getAttribute('data-product-price'));
+                    let quantity = parseInt(quantityElement.textContent);
 
                     if (target.classList.contains('btn-increase')) {
                         quantity++;
@@ -275,11 +235,13 @@
                         'id-ID', {
                             minimumFractionDigits: 2
                         });
-
                     updateTotal();
+                    prepareFormData();
+
+                    // --- Remove Logic ---
                 } else if (target.classList.contains('btn-remove') || target.closest(
                         '.btn-remove')) {
-                    var row = target.closest('tr');
+                    let row = target.closest('tr');
                     if (target.classList.contains('btn-remove')) {
                         row.remove();
                         updateTotal();
@@ -290,15 +252,51 @@
                 }
             });
 
-            function updateTotal() {
-                var totalElements = document.querySelectorAll('.total');
-                var grandTotal = Array.from(totalElements).reduce(function(accumulator, element) {
+            function updateTotal() {                
+                let totalInput = document.getElementById('total_price');    
+                let totalElements = document.querySelectorAll('.total');
+                let grandTotal = Array.from(totalElements).reduce(function(accumulator, element) {
                     return accumulator + parseFloat(element.textContent);
                 }, 0);
-
                 totalPriceElement.textContent = 'Rp ' + grandTotal + '.000,00';
+                totalInput.setAttribute("value", grandTotal + '.000,00');
             }
 
+            function prepareFormData() {
+                // Inisialisasi array terpisah
+                let arrayId = [];
+                let arrayName = [];
+                let arrayQty = [];
+                let arraySubTotal = [];
+
+                // Ambil data dari setiap baris pada keranjang
+                let rows = document.querySelectorAll('#cartTable tbody tr');
+
+                rows.forEach(function(row) {
+                    let productId = row.getAttribute('data-product-id');
+                    let productName = row.querySelector('td:nth-child(2)').innerText;
+                    let quantity = row.querySelector('.quantity').innerText;
+                    let total = row.querySelector('.total').innerText;
+
+                    // Tambahkan data ke masing-masing array
+                    arrayId.push(productId);
+                    arrayName.push(productName);
+                    arrayQty.push(quantity);
+                    arraySubTotal.push(total);
+                });
+
+                console.log('arrayId:', arrayId);
+                console.log('arrayName:', arrayName);
+                console.log('arrayQty:', arrayQty);
+                console.log('arraySubTotal:', arraySubTotal);
+
+                // Update nilai input tersembunyi pada formulir
+                document.getElementById('array_id').value = JSON.stringify(arrayId);
+                document.getElementById('array_name').value = JSON.stringify(arrayName);
+                document.getElementById('array_qty').value = JSON.stringify(arrayQty);
+                document.getElementById('array_subtotal').value = JSON.stringify(arraySubTotal);
+            }
         });
     </script>
 @endsection
+

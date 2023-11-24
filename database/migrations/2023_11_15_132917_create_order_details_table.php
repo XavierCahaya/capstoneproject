@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id');
-            $table->foreignId('product_id');
+            $table->foreignId('order_id')->references('id')->on('orders');
+            $table->foreignId('product_id')->references('id')->on('products');
+            $table->string('name');
             $table->integer('qty');
-            $table->bigInteger('total_price');
+            $table->decimal('subtotal', 15,2);
             $table->timestamps();
         });
     }

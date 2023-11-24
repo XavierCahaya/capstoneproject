@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->enum('delivery_option',['dine-in','delivery']);
             $table->string('orderer_name');
-            $table->string('phone');
-            $table->string('address');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->decimal('total_price', 15,2);
             $table->enum('status', ['success','not success']);
             $table->timestamps();
         });

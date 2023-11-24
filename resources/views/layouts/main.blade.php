@@ -16,6 +16,7 @@
     {{-- My Style --}}
     <link rel="stylesheet" href="{{ asset('css/navstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
     
     <title>N'Jajan</title>
 

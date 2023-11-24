@@ -8,20 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-
-    protected $table = 'orders';
-
+    
     protected $fillable = [
+        'option',
         'orderer_name',
         'phone',
         'address',
+        'total_price',
         'status',
-        'timestamp',
     ];
 
     public function orderDetails()
     {
-        return $this->hasMany(OrderDetail::class, 'order_id');
+        return $this->hasMany(OrderDetail::class);
     }
 
     public function getTotalItemsAttribute()
