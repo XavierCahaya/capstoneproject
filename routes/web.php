@@ -37,7 +37,7 @@ Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
 Route::get('/admin', [OrderInController::class, 'index']);
 Route::get('/OrderIn', [OrderInController::class, 'index']);
 Route::get('/OrderProcess', [OrderProcessController::class, 'index']);
-Route::get('/OrderDetail', [OrderDetailController::class, 'index']);
+Route::get('/OrderDetail', [OrderDetailController::class, 'index']);    
 Route::get('/OrderComplete', [OrderCompleteController::class, 'index']);
 
 Route::prefix('user')->group(function () {
