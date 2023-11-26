@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->decimal('total_price', 15,2);
-            $table->enum('status', ['success','not success']);
+            $table->enum('status', ['Menunggu Diproses', 'Sedang Diproses', 'Selesai', 'Sedang Diantar'])->default('Menunggu Diproses');
             $table->timestamps();
         });
     }

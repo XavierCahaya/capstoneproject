@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CekpesananController extends Controller
@@ -11,7 +12,8 @@ class CekpesananController extends Controller
      */
     public function index()
     {
-        return view('cekpesanan');
+        $order = Order::all();
+        return view('cekpesanan', compact('order'));
     }
 
     /**

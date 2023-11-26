@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('price');
             $table->string('image')->nullable();
+            $table->enum('status' ,['Aktif', 'Tidak Aktif'])->default('Aktif');
             $table->timestamps();
         });
     }

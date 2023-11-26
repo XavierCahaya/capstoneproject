@@ -10,7 +10,7 @@ class OrderCompleteController extends Controller
     public function index()
     {
         $orderIn = OrderComplete::with('orderDetails')->get();
-        return view('admin.OrderComplete', ['orderIn' => $orderIn]);
+        return view('admin.orderComplete', ['orderIn' => $orderIn]);
     }
 }
 
