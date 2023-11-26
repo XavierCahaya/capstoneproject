@@ -11,6 +11,7 @@
             <th>Kategori</th>
             <th>Deskripsi</th>
             <th>Harga</th>
+            <th>Status</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -25,6 +26,12 @@
                 <td>{{ $pd->category->name }}</td>
                 <td>{{ $pd->description }}</td>
                 <td>Rp. {{ $pd->price }}</td>
+                <td>
+                    @if ($pd->status == 'Aktif')
+                        <span class="badge text-bg-success">{{ $pd->status }}</span>
+                    @else
+                        <span class="badge text-bg-danger">{{ $pd->status }}</span>
+                    @endif
                 <td>
                     <a href="{{ route('form.update.product', $pd->id) }}" class="btn btn-sm btn-success">
                         Edit

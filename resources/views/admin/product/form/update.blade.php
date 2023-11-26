@@ -42,9 +42,17 @@
                     <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $products->price) }}" required>
                 </div>
 
-                <div class="form-group mb-4">
+                <div class="form-group mb-3">
                     <label for="description">Deskripsi</label>
                     <textarea name="description" id="description" class="form-control" required>{{ old('description', $products->description) }}</textarea>
+                </div>
+
+                <div class="form-group mb-4">
+                    <input class="form-check-input" type="checkbox" name="status" id="status" {{ $products->status == 'Aktif' ? 'checked' : '' }}>
+                    <label class="form-check-label ms-2" for="status">
+                        - Centang Untuk Mengaktifkan Produk <br>
+                        - Hiangkan Centang Untuk Menonaktifkan Produk
+                    </label>
                 </div>
 
                 <div class="button-group my-3 text-center">

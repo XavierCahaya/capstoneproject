@@ -10,7 +10,7 @@ class OrderInController extends Controller
     public function index()
     {
         $orderIn = OrderIn::with('orderDetails')->get();
-        return view('admin.OrderIn', ['orderIn' => $orderIn]);
+        return view('admin.orderIn', ['orderIn' => $orderIn]);
     }
 }
 

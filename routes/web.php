@@ -78,12 +78,12 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
     });
 
     Route::prefix('promo')->group(function () {
-            Route::get('/index', [PromoController::class, 'index'])->name('semua.promo');
-            Route::get('/promo/create', [PromoController::class, 'create'])->name('form.create.promo');
-            Route::post('/promo', [PromoController::class, 'store'])->name('add.promo');
-            Route::get('/promo/update/{id}', [PromoController::class, 'edit'])->name('form.update.promo');
-            Route::put('/promo/{id}', [PromoController::class, 'update'])->name('update.promo');
-            Route::get('/promo/delete/{id}', [PromoController::class, 'destroy'])->name('delete.promo');
-        });
+        Route::get('/index', [PromoController::class, 'index'])->name('semua.promo');
+        Route::get('/promo/create', [PromoController::class, 'create'])->name('form.create.promo');
+        Route::post('/promo', [PromoController::class, 'store'])->name('add.promo');
+        Route::get('/promo/update/{id}', [PromoController::class, 'edit'])->name('form.update.promo');
+        Route::put('/promo/{id}', [PromoController::class, 'update'])->name('update.promo');
+        Route::get('/promo/delete/{id}', [PromoController::class, 'destroy'])->name('delete.promo');
+    });
 
 });

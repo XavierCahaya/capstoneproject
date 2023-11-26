@@ -36,7 +36,6 @@ class OrderController extends Controller
             'phone' => $phone,
             'address' => $address,
             'total_price' => number_format(floatval($request->input('total_price')), 2, '.', '') * 1000,
-            'status' => 'success', // Default status
         ]);
         
         // Attach order details to the order

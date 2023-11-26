@@ -114,6 +114,7 @@ class AdminMenuController extends Controller
         $products->price = $request->input('price');
         $products->description = $request->input('description');
         $products->category_id = $request->input('category_id');
+        $products->status = $request->has('status') ? 'Aktif' : 'Tidak Aktif';
         $products->update();
 
         return redirect()->route('semua.menu');
