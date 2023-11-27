@@ -28,7 +28,7 @@
                 </h1>
                 <div class="row gutters-40">
                     <div class="col-lg-4 col-sm-4 col-4">
-                        <div class="product-box-layout4 momos">
+                        <div class="product-box-layout4">
                             <div class="item-figure">
                                 <img src="{{ asset('image/image1.webp')}}" alt="Category" width="100%" height="100%" />
                             </div>
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-4 col-4">
-                        <div class="product-box-layout4 chinese">
+                        <div class="product-box-layout4">
                             <div class="item-figure">
                                 <img src="{{ asset('image/image2.webp')}}" alt="Category" width="100%" height="100%" />
                             </div>
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-4 col-4">
-                        <div class="product-box-layout4 beverages">
+                        <div class="product-box-layout4">
                             <div class="item-figure">
                                 <img src="{{ asset('image/image3.webp')}}" alt="Category" width="100%" height="100%" />
                             </div>
