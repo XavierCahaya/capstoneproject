@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
 @section('container')
-    <div id="promo" class="carousel slide mb-4" data-bs-ride="carousel">
-        <div class="carousel-inner">
+    <div id="promo" class="carousel slide mx-auto mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
             @foreach ($promos as $key => $promo)
-                <div class="carousel-item {{ $key == 1 ? 'active':'' }}">
+                <div class="carousel-item {{ $key == 0 ? 'active':'' }}">
                     @if($promo->image)
                         <img src="{{ asset('images/promo/' . $promo->image) }}" class="d-block w-100" alt="Promo Image">
                     @endif

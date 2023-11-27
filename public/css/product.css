@@ -28,6 +28,10 @@ h6{
     padding: 10px ;
 }
 
+.carousel.slide {
+    max-height: 450px; 
+    max-width: 800px; 
+}
 
 @media only screen and (max-width: 1392px) and (min-width: 992px) {
     .btn-detail {

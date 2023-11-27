@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <div class="wrapper">
         <section class="home" id="home">
