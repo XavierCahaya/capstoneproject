@@ -1,45 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rasa:wght@300&display=swap');
 
-/* Profile Start */
 
-.profil .card {
-    background-color: #d9d9d9;
-    border: none;
+section {
+    padding: 2rem 7%;
 }
 
-.profil .title h1 {
-    font-weight: 700;
-}
-
-.profil .desc-umkm {
-    font-size: 1.3rem;
-}
-
-.keunggulan .title-keunggulan h1 {
-    background-color: #fc3e24;
-    width: 300px;
-    padding: 1rem;
+.heading {
+    text-align: center;
     color: #fff;
-    font-weight: 700;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    text-transform: uppercase;
+    padding-bottom: 3.5rem;
+    font-size: 3rem;
 }
 
-.keunggulan .card {
-    background-color: #d9d9d9;
-    border: none;
+
+.home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
 }
 
-.keunggulan .card .card-title {
+.home .content {
+    max-width: 60rem;
+}
+
+.home .content p {
     font-size: 1.5rem;
+    font-weight: lighter;
+    line-height: 1.8;
+    padding: 1rem 0;
+    color: #eee;
+    margin-bottom: 1.5rem;
 }
 
-.keunggulan .card .card-text {
-    text-align: justify;
+.btn.order-btn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 0.5rem 1.9rem;
+    font-size: 1.2rem;
+    color: #fff;
+    background: #fc3e24;
+    cursor: pointer;
 }
 
+.btn.order-btn:hover {
+    letter-spacing: 0.2rem;
+    background: #fff;
+    color: var(--main-color);
+}
+
+.welcome-text {
+    color: #ffffff;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    font-family: 'Playball', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-left: 200px;
+}
+
+.to-text {
+    color: #ffffff;
+    font-size: 3rem;
+    text-transform: lowercase;
+    margin-bottom: 10px;
+    font-family: 'Playball', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-left: 270px;
+}
+
+.njajaners-text {
+    color: #fc3e24;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-family: 'Alfa Slab One', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-left: 140px;
+}
+
+.container {
+    padding: 0;
+}
+
+.row {
+    width: 100%;
+    margin: auto;
+}
+
+.categorySection {
+    padding-top: 1%;
+    background-color: #ffffff;
+    padding-bottom: 6%;
+}
+
+
+
+.categorySection .container h1 {
+    text-align: center;
+    margin: 35px auto;
+}
+
+.categorySection .container h1 b {
+    font-size: 2.2rem;
+    color: #fb4646;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Gabriela', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.categorySection .container h1 b::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: #fc3e24;
+    /* Warna garis bawah */
+    margin: 10px auto;
+    /* Atur jarak dari teks */
+}
+
+
+.product-box-layout4 {
+    padding: 30px;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 4rem;
+}
+
+.product-box-layout4:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #fb4646;
+    z-index: -1;
+    transform: rotate(0deg);
+}
+
+.product-box-layout4 .item-figure {
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2;
+    height: 300px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.product-box-layout4 .item-content {
+    text-align: center;
+    padding: 25px 0 0;
+}
+
+.product-box-layout4:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    z-index: -2;
+    transform: rotate(-3deg);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    border: 0.1rem solid #f7a3a3;
+}
+
+.product-box-layout4:hover:after {
+    transform: rotate(3deg);
+}
+
+.card-title {
+    font-family: 'Rasa', cursive;
+    font-size: 2.3rem; 
+    color: #000; 
+    font-weight: bold;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.text-section {
+    max-width: 50%;
+
+}
+
+.logo-section {
+    float: right;
+}
+
+.welcome-text, .to-text, .njajaners-text {
+    margin-left: 0; 
+}
+
+.card-title {
+    font-family: 'Rasa', cursive;
+    font-size: 2rem; /* Ganti dengan ukuran font yang diinginkan */
+    color: #000;
+    font-weight: bold;
+    text-align: center; /* Menengahkan teks */
+}
+
+/* Gaya untuk seluruh teks h2 di dalam .item-content */
+.item-content h2 {
+    font-family: 'Rasa', cursive;
+    font-size: 1.5rem; /* Ganti dengan ukuran font yang diinginkan */
+    color: #000;
+    font-weight: bold;
+    text-align: center; /* Menengahkan teks */
+}
 /* Profile End */
 
 /* Menu Start */
