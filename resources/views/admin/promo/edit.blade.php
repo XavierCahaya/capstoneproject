@@ -25,12 +25,17 @@
                 </div>
                 <div class="mb-3">
                     <label for="image">Gambar :</label>
-                    <input type='file' name='image' class='form-control' id="image">
-                    <img src="{{ asset($promos->image) }}" style="width:140px;height:110px" alt="Promo">
+                    @if($promos->image)
+                        <img src="{{ asset('images/promo/'. $promos->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                    @else
+                        <img class="img-preview img-fluid mb-3 col-sm-5">
+                    @endif
+                    <input type='file' name='image' class='form-control' id="image" required onchange="previewImage()">
+                    <p>Usahakan gambar berukuran 1600 x 900 pixel</p>
                 </div>
                 <div class="mb-3">
                     <label for="status">Status :</label> <br/>
-                    <input type="checkbox" name='status' style="width:30px;height:30px" id="status" {{ $promos->status == '1' ? 'checked' : '' }}> <br>
+                    <input type="checkbox" name='status' style="width:30px;height:30px" id="status" {{ $promos->status == '0' ? 'checked' : '' }}> <br>
                     <p>Ceklist kotak untuk mengaktifkan promo</p>
                 </div>
                 <div class="mb-3">
@@ -40,4 +45,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview')
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL( image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+</script>
 @endsection

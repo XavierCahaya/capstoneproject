@@ -10,7 +10,7 @@
             N'Jajan
         </h5>
         <p style="text-align: justify">
-            Rasakan pengalaman kuliner yang berbeda dengan menikmati cita rasa autentik dari nikmatnya mie dan segarnya minuman dari N'Jajan. Sedia makanan pedas peningkat mood dengan harga murah. Permudah dapatkan semua kenikmatan itu dengan memesan produk N'Jajan di website ini. <br><a href="/menu" style="color: #FC3E24; font-weight: bold;">Pesan Sekarang</a>
+            Rasakan pengalaman kuliner yang berbeda dengan menikmati cita rasa autentik dari nikmatnya mie dan segarnya minuman dari N'Jajan. Sedia makanan pedas peningkat mood dengan harga murah. Permudah dapatkan semua kenikmatan itu dengan memesan produk N'Jajan di website ini. <br><a href="{{ route('product') }}" style="color: #FC3E24; font-weight: bold;">Pesan Sekarang</a>
         </p>
     </div>
     <div class="col-lg-3 col-md-6 mb-1 text-center">
