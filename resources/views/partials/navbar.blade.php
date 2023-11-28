@@ -21,7 +21,7 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('login') }}">Admin</a>
+                    <a class="nav-link {{ request()->is('auth/login') ? 'active' : '' }}" href="{{ route('login') }}">Admin</a>
                 </li>
             </ul>
         </div>
