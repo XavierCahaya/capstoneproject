@@ -25,7 +25,7 @@
                 <td>{{ $pd->name }}</td>
                 <td>{{ $pd->category->name }}</td>
                 <td>{{ $pd->description }}</td>
-                <td>Rp. {{ $pd->price }}</td>
+                <td>Rp. {{ number_format($pd->price, 0, '.', '.') }}</td>
                 <td>
                     @if ($pd->status == 'Aktif')
                         <span class="badge text-bg-success">{{ $pd->status }}</span>

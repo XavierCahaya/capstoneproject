@@ -34,11 +34,11 @@
                         <thead class="table-light">
                             <tr>
                                 <th>No</th>
+                                <th>Tanggal</th>
                                 <th>Nama Pemesan</th>
                                 <th>Nama Produk</th>
                                 <th>Jumlah Pesanan</th>
                                 <th>Total Pembayaran</th>
-                                <th>Tanggal</th>
                             </tr>
                         </thead>
 
@@ -52,6 +52,9 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
+                                        {{ $income->updated_at }}
+                                    </td>
+                                    <td>
                                         {{ $income->order->orderer_name }}
                                     </td>
                                     <td>
@@ -62,9 +65,6 @@
                                     </td>
                                     <td>
                                         Rp. {{ number_format($income->subtotal, 0, '.', '.') }}
-                                    </td>
-                                    <td>
-                                        {{ $income->updated_at }}
                                     </td>
                                 </tr>
 

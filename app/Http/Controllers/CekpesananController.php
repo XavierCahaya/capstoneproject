@@ -7,36 +7,21 @@ use Illuminate\Http\Request;
 
 class CekpesananController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function semua()
     {
         $order = Order::all();
-        return view('cekpesanan', compact('order'));
+        return view('cekpesanan.semua', compact('order'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function delivery()
     {
-        //
-    }
+        $order = Order::where('delivery_option', 'delivery')->get();
+        return view('cekpesanan.delivery', compact('order'));
+    }    
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function dineIn()
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $order = Order::where('delivery_option', 'dine-in')->get();
+        return view('cekpesanan.dineIn', compact('order'));
     }
 }
