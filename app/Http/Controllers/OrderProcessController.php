@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\OrderDetail;
 use App\Models\OrderProcess;
+use Illuminate\Http\Request;
 
 class OrderProcessController extends Controller
 {
     public function index()
     {
-        $orderIn = OrderProcess::with('orderDetails')->get();
-        return view('admin.orderProcess', ['orderIn' => $orderIn]);
+        $orderIn = OrderDetail::with('product', 'order')
+        ->whereHas('order', function ($query) {
+            $query->where('status', 'Sedang Diproses');
+        })->get();
+        return view('admin.orderProcess', compact('orderIn'));
     }
 }
 
