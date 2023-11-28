@@ -19,35 +19,43 @@
 </head>
 <div class="container mt-4 table-container">
     <div class="card">
-        <div class="table-responsive">
-        <h4 class="card-title">Pesanan Masuk</h4>
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Waktu Pemesanan</th>
-                        <th>Nama</th>
-                        <th>Nama Produk</th>
-                        <th>Jumlah Item</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($orderIn as $order)
+        <div class="card-body">
+            <div class="table-responsive">
+                <h4 class="card-title">Pesanan Masuk</h4>
+                <table class="table table-bordered table-hover">
+                    <thead>
                         <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->created_at }}</td>
-                            <td>{{ $order->orderer_name }}</td>
-                            <td>{{ $order->orderer_name }}</td>
-                            <td>{{ $order->getTotalItemsAttribute() }}</td>
-                            <td>
-                                <button class="btn btn-danger">Tolak</button>
-                                <button class="btn btn-success">Terima</button>
-                            </td>
+                            <th>ID</th>
+                            <th>Waktu Pemesanan</th>
+                            <th>Nama</th>
+                            <th>No Telepon</th>
+                            <th>Alamat</th>
+                            <th>Jumlah Item</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($orderIn as $order)
+                            <tr>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->created_at }}</td>
+                                <td>{{ $order->order->orderer_name }}</td>
+                                <td>{{ $order->order->phone }}</td>
+                                <td>{{ $order->order->address }}</td>
+                                <td>{{ $order->qty }}</td>
+                                <td>{{ $order->order->status }}</td>
+                                <td>
+                                    <button class="btn btn-warning">Detail</button>
+                                    <a href="{{ route('orderIn.action', $order->id) }}">
+                                        <button type="submit" class="btn btn-success">Terima</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

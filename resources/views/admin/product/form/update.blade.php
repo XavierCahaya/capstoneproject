@@ -18,11 +18,13 @@
 
                 <div class="form-group mb-3">
                     <label for="image">Gambar</label>
-                    <input type="file" name="image" id="image" class="form-control">
-                    @if ( $products->image )
-                    <input type="hidden" name="image" id="image" class="form-control" value="{{ $products->image }}">
-                        <p>Gambar : {{ $products->image }}</p>
+                    <img class="img-preview img-fluid mb-3 col-sm-5">
+                    @if($products->image)
+                    <img src="{{ asset('images/product/'. $products->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                    @else
+                    <img class="img-preview img-fluid mb-3 col-sm-5">
                     @endif
+                    <input type="file" name="image" id="image" class="form-control" required onchange="previewImage()">
                 </div>
 
                 <div class="form-group mb-3">
@@ -51,7 +53,7 @@
                     <input class="form-check-input" type="checkbox" name="status" id="status" {{ $products->status == 'Aktif' ? 'checked' : '' }}>
                     <label class="form-check-label ms-2" for="status">
                         - Centang Untuk Mengaktifkan Produk <br>
-                        - Hiangkan Centang Untuk Menonaktifkan Produk
+                        - Hilangkan Centang Untuk Menonaktifkan Produk
                     </label>
                 </div>
 
@@ -65,5 +67,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview')
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL( image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+</script>
 
 @endsection
