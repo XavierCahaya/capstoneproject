@@ -3,6 +3,7 @@
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminLaporanKeuangan;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PromoController;
@@ -38,7 +39,7 @@ Route::get('/admin', [OrderInController::class, 'index']);
 Route::get('/OrderIn', [OrderInController::class, 'index']);
 Route::get('/OrderIn/Prosess/{id}', [OrderInController::class, 'btnAction'])->name('orderIn.action');
 Route::get('/OrderProcess', [OrderProcessController::class, 'index']);
-Route::get('/OrderDetail', [OrderDetailController::class, 'index']);    
+Route::get('/OrderDetail', [OrderDetailController::class, 'index']);
 Route::get('/OrderComplete', [OrderCompleteController::class, 'index']);
 
 Route::prefix('user')->group(function () {
@@ -86,5 +87,9 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
         Route::put('/promo/{id}', [PromoController::class, 'update'])->name('update.promo');
         Route::get('/promo/delete/{id}', [PromoController::class, 'destroy'])->name('delete.promo');
     });
+
+    Route::get('/laporan-keuangan', [AdminLaporanKeuangan::class, 'index'])->name('laporankeuangan');
+    Route::get('/export', [AdminLaporanKeuangan::class, 'export'])->name('exportlaporan');
+
 
 });

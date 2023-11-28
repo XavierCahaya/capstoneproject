@@ -40,7 +40,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('laporankeuangan') }}">
                 <span class="icon"><i class="ri-wallet-3-line"></i></span>
                 <div class="sidebar--item">Laporan Keuangan</div>
             </a>
