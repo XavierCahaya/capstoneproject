@@ -92,8 +92,8 @@
             <form action="{{ route('checkout') }}" method="POST" onsubmit="prepareFormData()">
                 @csrf
                 <div class="mb-3">
-                    <label for="delivery-option" class="form-label">Opsi Pesanan</label>
-                    <select class="form-select" id="delivery-option" name="delivery-option">
+                    <label for="delivery_option" class="form-label">Opsi Pesanan</label>
+                    <select class="form-select" id="delivery_option" name="delivery_option">
                         <option value="dine-in">Dine In</option>
                         <option value="delivery">Delivery</option>
                     </select>
@@ -133,12 +133,13 @@
 
         // --- Logic Tampilan Pilihan Opsi Pemesanan ---
         document.addEventListener('DOMContentLoaded', function() {
-            let deliveryOption = document.getElementById('delivery-option');
+            let deliveryOption = document.getElementById('delivery_option');
             let deliveryFields = document.getElementById('delivery-fields');    
             let phone = document.getElementById('phone');
             let address = document.getElementById('address');
 
             deliveryOption.addEventListener('change', function() {
+                console.log('Delivery Option Changed:', deliveryOption.value);
                 if (deliveryOption.value === 'delivery') {
                     deliveryFields.style.display = 'block';
                     phone.required = true;

@@ -12,13 +12,12 @@ class OrderController extends Controller
 
     public function checkout(Request $request)
     {
-
         $arrayId = json_decode($request->input('array_id'));
         $arrayName = json_decode($request->input('array_name'));
         $arrayQty = json_decode($request->input('array_qty'));
         $arraySubtotal = json_decode($request->input('array_subtotal'));
 
-        $deliveryOption = $request->input('delivery-option');
+        $deliveryOption = $request->input('delivery_option');
         $phone = null;
         $address = null;
 
@@ -31,7 +30,7 @@ class OrderController extends Controller
 
         // Create a new order
         $order = Order::create([
-            'delivery-option' => $deliveryOption,
+            'delivery_option' => $deliveryOption,
             'orderer_name' => $request->input('orderer_name'),
             'phone' => $phone,
             'address' => $address,
