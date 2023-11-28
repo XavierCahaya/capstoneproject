@@ -35,19 +35,16 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
-Route::get('/admin', [OrderInController::class, 'index']);
-Route::get('/OrderIn', [OrderInController::class, 'index']);
-Route::get('/OrderIn/Prosess/{id}', [OrderInController::class, 'btnAction'])->name('orderIn.action');
-Route::get('/OrderProcess', [OrderProcessController::class, 'index']);
-Route::get('/OrderDetail', [OrderDetailController::class, 'index']);
-Route::get('/OrderComplete', [OrderCompleteController::class, 'index']);
-
 Route::prefix('user')->group(function () {
     Route::get('/menu', [ProductController::class,'index'])->name('product');
     Route::post('/checkout', [OrderController::class,'checkout'])->name('checkout');
-    Route::get('/cekpesanan', [CekpesananController::class, 'index'])->name('cekpesanan');
     Route::get('category', [CategoryController::class, 'user'])->name('category.index');
     Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');
+    Route::prefix('/cekpesanan')->group(function () {
+        Route::get('/semua', [CekpesananController::class, 'semua'])->name('cek.semua');
+        Route::get('/delivery', [CekpesananController::class, 'delivery'])->name('cek.delivery');
+        Route::get('/dineIn', [CekpesananController::class, 'dineIn'])->name('cek.dineIn');
+    });
 });
 
 Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
@@ -77,19 +74,26 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
             Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('delete.category');
         });
 
+        Route::prefix('order')->group(function () {
+            Route::get('/OrderIn', [OrderInController::class, 'index'])->name('orderIn');
+            Route::get('/OrderIn/Prosess/{id}', [OrderInController::class, 'btnAction'])->name('orderIn.action');
+            Route::get('/OrderProcess', [OrderProcessController::class, 'index'])->name('orderProcess');
+            Route::get('/OrderDetail', [OrderDetailController::class, 'index']);    
+            Route::get('/OrderComplete', [OrderCompleteController::class, 'index'])->name('orderComplete');
+        });
+
+        Route::prefix('promo')->group(function () {
+            Route::get('/index', [PromoController::class, 'index'])->name('semua.promo');
+            Route::get('/promo/create', [PromoController::class, 'create'])->name('form.create.promo');
+            Route::post('/promo', [PromoController::class, 'store'])->name('add.promo');
+            Route::get('/promo/update/{id}', [PromoController::class, 'edit'])->name('form.update.promo');
+            Route::put('/promo/{id}', [PromoController::class, 'update'])->name('update.promo');
+            Route::get('/promo/delete/{id}', [PromoController::class, 'destroy'])->name('delete.promo');
+        });
+    
+        Route::get('/laporan-keuangan', [AdminLaporanKeuangan::class, 'index'])->name('laporankeuangan');
+        Route::get('/export', [AdminLaporanKeuangan::class, 'export'])->name('exportlaporan');
+
     });
-
-    Route::prefix('promo')->group(function () {
-        Route::get('/index', [PromoController::class, 'index'])->name('semua.promo');
-        Route::get('/promo/create', [PromoController::class, 'create'])->name('form.create.promo');
-        Route::post('/promo', [PromoController::class, 'store'])->name('add.promo');
-        Route::get('/promo/update/{id}', [PromoController::class, 'edit'])->name('form.update.promo');
-        Route::put('/promo/{id}', [PromoController::class, 'update'])->name('update.promo');
-        Route::get('/promo/delete/{id}', [PromoController::class, 'destroy'])->name('delete.promo');
-    });
-
-    Route::get('/laporan-keuangan', [AdminLaporanKeuangan::class, 'index'])->name('laporankeuangan');
-    Route::get('/export', [AdminLaporanKeuangan::class, 'export'])->name('exportlaporan');
-
 
 });

@@ -1,19 +1,25 @@
 <div class="sidebar">
     <ul class="sidebar--items">
         <li>
-            <a href="OrderIn" class="active">
+            <a href="#" class="active">
+                <span class="icon"><i class="ri-dashboard-line"></i></span>
+                <div class="sidebar--item">Dashboard</div>
+            </a>
+        </li>      
+        <li>
+            <a href="{{ route('orderIn') }}">
                 <span class="icon"><i class="ri-login-circle-line"></i></span>
                 <div class="sidebar--item">Pesanan Masuk</div>
             </a>
         </li>
         <li>
-            <a href="OrderProcess">
+            <a href="{{ route('orderProcess') }}">
                 <span class="icon"><i class="ri-time-line"></i></span>
                 <div class="sidebar--item">Pesanan Diproses</div>
             </a>
         </li>
         <li>
-            <a href="OrderComplete">
+            <a href="{{ route('orderComplete') }}">
                 <span class="icon"><i class="ri-checkbox-circle-line"></i></span>
                 <div class="sidebar--item">Pesanan Selesai</div>
             </a>

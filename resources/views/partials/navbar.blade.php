@@ -13,10 +13,10 @@
                     <a class="nav-link {{ request()->is('user/menu') ? 'active' : '' }}" href="{{ route('product') }}">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('user/kategori') ? 'active' : '' }}" href="{{route('category.index')}}">Kategori</a>
+                    <a class="nav-link {{ request()->is('user/category') ? 'active' : '' }}" href="{{route('category.index')}}">Kategori</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('user/cekpesanan') ? 'active' : '' }}" href="{{ route('cekpesanan') }}">Cek Pesanan</a>
+                    <a class="nav-link {{ request()->is('user/cekpesanan/semua', 'user/cekpesanan/delivery', 'user/cekpesanan/dineIn') ? 'active' : '' }}" href="{{ route('cek.semua') }}">Cek Pesanan</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
