@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class CekpesananController extends Controller
@@ -10,18 +11,21 @@ class CekpesananController extends Controller
     public function semua()
     {
         $order = Order::all();
-        return view('cekpesanan.semua', compact('order'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('cekpesanan.semua', compact('order', 'orderDetail'));
     }
 
     public function delivery()
     {
         $order = Order::where('delivery_option', 'delivery')->get();
-        return view('cekpesanan.delivery', compact('order'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('cekpesanan.delivery', compact('order', 'orderDetail'));
     }    
 
     public function dineIn()
     {
         $order = Order::where('delivery_option', 'dine-in')->get();
-        return view('cekpesanan.dineIn', compact('order'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('cekpesanan.dineIn', compact('order', 'orderDetail'));
     }
 }

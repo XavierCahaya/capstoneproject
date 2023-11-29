@@ -3,8 +3,12 @@ body {
     background: #ececec;
 }
 
+.container{
+    min-width: 290px;
+}
+
 .box-area {
-    width: 900px;
+    min-width: 290px;
 }
 
 .right-box {
@@ -20,15 +24,17 @@ body {
     ;
 }
 
+.btn:hover{
+    background-color: #fc3d24bd;
+}
+
 @media only screen and (max-width:768px) {
     .box-area {
         margin: 0 10px;
     }
-    .left-box {
-        height: 100px;
-        overflow: hidden;
+
+    .container {
+        flex-direction: column;
     }
-    .right-box {
-        padding: 20px;
-    }
+    
 }

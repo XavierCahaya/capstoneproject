@@ -159,6 +159,10 @@ i.sun {
     color: var(--text-color-first);
 }
 
+.logout--item:hover {
+    color: var(--bg-color-third);
+}
+
 .logout a span {
     margin-right: 6px;
     width: 0px;

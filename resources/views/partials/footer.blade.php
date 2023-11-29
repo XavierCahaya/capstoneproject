@@ -55,7 +55,7 @@
 </div>
 <div class="text-center text-light p-3" style="background-color: rgba(252, 62, 36, 1);">
     © 2023 Copyright :
-    <a class="text-light" href="https://mdbootstrap.com/" >DevTeam-CP2</a>
+    <a class="text-light" href="#" >DevTeam-CP2</a>
 </div>
 <!-- Copyright -->
 </footer>

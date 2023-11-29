@@ -14,27 +14,29 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $input = $request->all();
-
-        $this->validate($request, [
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if(auth()->attempt(['email' => $input['email'], 'password' => $input['password']]))
+        if(Auth::attempt($credentials)) 
         {
-            if(auth()->user()->role == 'admin'){
-                return redirect()->route('dashboard');
-            }
-        };
+            $request->session()->regenerate();
+            return redirect()->intended(route('dashboard'));
+        }
+
+        return back()->with('loginError', 'Login Gagal!');
+
     }
 
     public function logout(Request $request)
     {
-        Auth::guard('web')->logout();
-
+        Auth::logout();
+ 
         $request->session()->invalidate();
-
+     
+        $request->session()->regenerateToken();
+     
         return redirect('/');
     }
 }

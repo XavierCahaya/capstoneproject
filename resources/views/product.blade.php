@@ -164,7 +164,9 @@
 
                 <button type="submit" class="btn btn-success mb-4" id="checkout-btn">Checkout</button>
                 @if (session('message'))
-                    <div class="alert alert-success">{{ session('message') }}</div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 @endif
             </form>
         </div>
