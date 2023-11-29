@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
 @section('container')
+    @if (session('message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div id="promo" class="carousel slide mx-auto mb-3" data-bs-ride="carousel">
         <div class="carousel-inner text-center">
             @foreach ($promos as $key => $promo)
@@ -52,7 +57,7 @@
                                 </div>
                                 <p class="card-text text-center" style="font-size: 15px">{{ $product->name }}</p>
                                 <div class="card-btn d-flex justify-content-between align-items-center">
-                                    <button type="button" class="btn btn-primary btn-detail" style="background-color:#1FD8CD; border-radius:10px; font-size:.8em;" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                                    <button type="button" class="btn btn-primary btn-detail" style="background-color:#1f7fd8; border-radius:10px; font-size:.8em;" data-bs-toggle="modal" data-bs-target="#exampleModal" 
                                         data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}" data-product-description="{{ $product->description }}" data-product-image="{{ asset('images/product/'. $product->image) }}" data-product-price="{{ $product->price }}">
                                         Lihat Detail
                                     </button>
@@ -65,17 +70,17 @@
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
-                                            <div class="modal-header">
+                                            <div class="modal-header" style="background: #FC3E24;">
                                                 <div class="row w-100">
                                                     <div class="col-6">
-                                                        <div class="modal-title fs-5 text-start" id="exampleModalLabel">
-                                                            <p id="product-name"></p>
+                                                        <div class="modal-title fs-5 text-start text-light" id="exampleModalLabel">
+                                                            <p id="product-name" style="padding-left:16px; margin:0;"></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-6 text-end fs-5">
-                                                        <div class="d-flex justify-content-end">
-                                                            <p class="mr-2">Rp</p>
-                                                            <p id="product-price"></p>
+                                                        <div class="d-flex justify-content-end text-light">
+                                                            <p class="mr-2" style="margin:0;">Rp</p>
+                                                            <p id="product-price" style="margin:0;"></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -85,13 +90,13 @@
                                                     <div class="col-md-6 text-center">
                                                         <img src="{{ asset('images/product/'. $product->image) }}" id="product-image" class="img-fluid">
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mt-2">
                                                         <p id="product-description"></p>
                                                     </div>
                                                 </div>
                                             </div>                                        
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>    
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>    
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +122,7 @@
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="cartTableBody">
                         <!-- Table content will be dynamically added here -->
                     </tbody>
                 </table>
@@ -130,7 +135,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('checkout') }}" method="POST" onsubmit="prepareFormData()">
+            <form action="{{ route('checkout') }}" method="POST" id="checkout-form" onsubmit="prepareFormData()">
                 @csrf
                 <div class="mb-3">
                     <label for="delivery_option" class="form-label">Opsi Pesanan</label>
@@ -155,41 +160,64 @@
                         <textarea class="form-control" id="address" name="address"></textarea>
                     </div>
                 </div>
+
+                <div class="mb-3">
+                    <label for="payment_option" class="form-label">Opsi Pembayaran</label>
+                    <select class="form-select" id="payment_option" name="payment_option" required>
+                        <option value="tunai">Tunai</option>
+                        <option value="non-tunai">Non Tunai</option>
+                    </select>
+                </div>
+
                 <input type="hidden" name="total_price" id="total_price">
-        
                 <input type="hidden" name="array_id" id="array_id" value="">
                 <input type="hidden" name="array_name" id="array_name" value="">
                 <input type="hidden" name="array_qty" id="array_qty" value="">
                 <input type="hidden" name="array_subtotal" id="array_subtotal" value="">
 
-                <button type="submit" class="btn btn-success mb-4" id="checkout-btn">Checkout</button>
-                @if (session('message'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('message') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Checkout</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Apakah Anda yakin ingin melakukan checkout? <br>
+                                Pesanan yang dibuat tidak bisa dibatalkan!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                                <button type="button" class="btn btn-success     px-3" id="confirmCheckout">Ya</button>
+                            </div>
+                        </div>
                     </div>
-                @endif
+                </div>
+
+                <button type="submit" class="btn btn-success mb-4" id="checkout-btn" data-bs-toggle="modal" data-bs-target="#confirmationModal" disabled>Checkout</button>
             </form>
         </div>
     </div>
 
     <script>
+        let modalConfirmed = false;
 
         document.addEventListener('DOMContentLoaded', function () {
-            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
 
             document.querySelectorAll('.btn-detail').forEach(function (button) {
                 button.addEventListener('click', function () {
-                    var productId = this.getAttribute('data-product-id');
-                    var name = this.getAttribute('data-product-name');
-                    var description = this.getAttribute('data-product-description');
-                    var price = this.getAttribute('data-product-price');
-                    var imageSrc = this.getAttribute('data-product-image');
+                    let productId = this.getAttribute('data-product-id');
+                    let name = this.getAttribute('data-product-name');
+                    let description = this.getAttribute('data-product-description');
+                    let price = this.getAttribute('data-product-price');
+                    let imageSrc = this.getAttribute('data-product-image');
 
                     document.getElementById('product-name').innerHTML = name;
                     document.getElementById('product-description').innerHTML = description;
                     document.getElementById('product-price').innerHTML = price;
 
-                    var productImage = document.getElementById('product-image');
+                    let productImage = document.getElementById('product-image');
                     productImage.src = imageSrc;
                     productImage.alt = name;
 
@@ -276,6 +304,7 @@
                         tableBody.innerHTML += newRow;
                     }
                     updateTotal();
+                    updateCheckoutButtonStatus()
                     prepareFormData();
                 });
             });
@@ -305,6 +334,7 @@
                             minimumFractionDigits: 2
                         });
                     updateTotal();
+                    updateCheckoutButtonStatus()
                     prepareFormData();
 
                     // --- Remove Logic ---
@@ -319,6 +349,7 @@
                         removeButton.click();
                     }
                 }
+                updateCheckoutButtonStatus();
             });
 
             function updateTotal() {                
@@ -365,6 +396,61 @@
                 document.getElementById('array_qty').value = JSON.stringify(arrayQty);
                 document.getElementById('array_subtotal').value = JSON.stringify(arraySubTotal);
             }
+
+            let confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            document.getElementById('checkout-btn').addEventListener('click', function (event) {
+                event.preventDefault();
+                confirmationModal.show();
+
+                document.getElementById('confirmCheckout').addEventListener('click', function () {
+                    modalConfirmed = true;
+                    confirmationModal.hide();
+                    document.getElementById('checkout-form').submit();
+                });
+
+                // Menanggapi penutupan modal
+                confirmationModal._element.addEventListener('hidden.bs.modal', function () {
+                    modalConfirmed = false;
+                    updateCheckoutButtonStatus();
+                });
+
+                // Menanggapi penutupan modal tanpa konfirmasi
+                document.getElementById('confirmationModal').addEventListener('hide.bs.modal', function (event) {
+                    if (!modalConfirmed) {
+                        modalConfirmed = false;
+                        // Kembalikan status tombol Checkout
+                        updateCheckoutButtonStatus();
+                    }
+                });
+            });
+
+            function isCartEmpty() {
+                let tableBody = document.getElementById('cartTableBody');
+                return tableBody.children.length === 0;
+            }
+
+            document.addEventListener('input', function () {
+            updateCheckoutButtonStatus();
+            });
+
+            function updateCheckoutButtonStatus() {
+
+                let isCartEmptyFlag = isCartEmpty();
+                let ordererNameInput = document.getElementById('orderer_name');
+                let phoneInput = document.getElementById('phone');
+                let addressInput = document.getElementById('address');
+                let paymentOptionSelect = document.getElementById('payment_option');
+
+                let isFormValid = ordererNameInput.value.trim() !== '' && paymentOptionSelect.value.trim() !== '';
+
+                if (document.getElementById('delivery_option').value === 'delivery') {
+                    isFormValid = isFormValid && phoneInput.value.trim() !== '' && addressInput.value.trim() !== '';
+                }
+
+                document.getElementById('checkout-btn').disabled = !isFormValid;
+                document.getElementById('checkout-btn').disabled = !isFormValid || isCartEmptyFlag;
+            }
+
         });
     </script>
 @endsection

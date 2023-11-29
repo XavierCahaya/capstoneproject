@@ -28,6 +28,8 @@ class OrderController extends Controller
             $address = $request->input('address');
         }
 
+        $statusPembayaran = ($request->input('payment_option') == 'non-tunai') ? 'Sudah Dibayar' : 'Belum Dibayar';
+
         // Create a new order
         $order = Order::create([
             'delivery_option' => $deliveryOption,
@@ -35,6 +37,8 @@ class OrderController extends Controller
             'phone' => $phone,
             'address' => $address,
             'total_price' => number_format(floatval($request->input('total_price')), 2, '.', '') * 1000,
+            'payment_option' => $request->input('payment_option'),
+            'status_pembayaran' => $statusPembayaran,
         ]);
         
         // Attach order details to the order
@@ -69,35 +73,4 @@ class OrderController extends Controller
         return $orderDetails;
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function masuk()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
