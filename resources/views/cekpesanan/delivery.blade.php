@@ -1,8 +1,9 @@
 @extends('cekpesanan.main')
 
 @section('content-table')
-<table class="table">
-    <thead>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
         <tr>
             <th>No</th>
             <th>Tanggal Masuk</th>
@@ -11,7 +12,6 @@
             <th>Nomer Telepon</th>
             <th>Alamat</th>
             <th>Jumlah Pesanan</th>
-            <th>Total Pembayaran</th>
             <th>Status Pesanan</th>
             <th>Aksi</th>
         </tr>
@@ -26,7 +26,6 @@
             <td>{{ $od->phone }}</td>
             <td>{{ $od->address }}</td>
             <td>{{ $od->getTotalItemsAttribute() }}</td>
-            <td>Rp. {{ $od->total_price }}</td>
             <td>{{ $od->status }}</td>
             <td>
                 <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"">  
