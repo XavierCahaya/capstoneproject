@@ -26,7 +26,17 @@
             <td>{{ $od->phone  ?: '-' }}</td>
             <td>{{ $od->address  ?: '-' }}</td>
             <td>{{ $od->getTotalItemsAttribute() }}</td>
-            <td>{{ $od->status }}</td>
+            <td>
+                @if ($od->status == 'Menunggu Diproses')
+                    <span class="badge text-bg-warning">{{ $od->status }}</span>
+                @elseif ($od->status == 'Sedang Diproses')
+                    <span class="badge text-bg-info">{{ $od->status }}</span>
+                @elseif ($od->status == 'Selesai')
+                    <span class="badge text-bg-success">{{ $od->status }}</span>
+                @else
+                    <span class="badge text-bg-secondary">{{ $od->status }}</span>
+                @endif
+            </td>
             <td>
                 <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"">  
                     Detail                 

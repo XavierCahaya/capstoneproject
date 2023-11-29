@@ -1,5 +1,5 @@
 
-<footer style="background-color: rgba(252, 62, 36, .2);">
+<footer class="mt-auto" style="background-color: rgba(252, 62, 36, .2);">
 <div class="container p-4">
     <div class="row">
     <div class="d-flex col-lg-2 col-md-3 mb-1 justify-content-center align-items-center">

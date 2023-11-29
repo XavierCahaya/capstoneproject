@@ -9,13 +9,29 @@ use App\Models\OrderIn;
 
 class OrderInController extends Controller
 {
-    public function index()
+    public function semua()
     {
-        $orderIn = OrderDetail::with('product', 'order')
-        ->whereHas('order', function ($query) {
-            $query->where('status', 'Menunggu Diproses');
-        })->get();
-        return view('admin.orderIn', compact('orderIn'));
+        $order = Order::where('status', 'Menunggu Diproses')->get();
+        $orderIn = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.in.semua', compact('order' ,'orderIn'));
+    }
+
+    public function delivery()
+    {
+        $order = Order::where('status', 'Menunggu Diproses')
+                        ->where('delivery_option', 'delivery')
+                        ->get();
+        $orderIn = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.in.delivery', compact('order' ,'orderIn'));
+    }
+
+    public function dineIn()
+    {
+        $order = Order::where('status', 'Menunggu Diproses')
+                        ->where('delivery_option', 'dine-in')
+                        ->get();
+        $orderIn = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.in.dineIn', compact('order' ,'orderIn'));
     }
 
     public function btnAction(Request $request ,$id)

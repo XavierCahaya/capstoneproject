@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="cekpesanan d-flex align-items-center justify-content-center">
+<div class="cekpesanan">
     <div class="content">
         <div class="title-page text-center mb-3">
             <h1>Cek Pesanan</h1>
@@ -21,7 +21,9 @@
         </div>
         <div class="card">
             <div class="card-body">
-                @yield('content-table')
+                <div class="table-responsive">
+                    @yield('content-table')
+                </div>
             </div>
         </div>
     </div>

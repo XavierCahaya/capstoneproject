@@ -7,19 +7,19 @@
             </a>
         </li>      
         <li>
-            <a href="{{ route('orderIn') }}" class="{{ request()->is('cms/order/OrderIn') ? 'active' : '' }}">
+            <a href="{{ route('orderIn') }}" class="{{ request()->is('cms/order/sub-orderIn/OrderIn/semua') ? 'active' : '' }}">
                 <span class="icon"><i class="ri-login-circle-line"></i></span>
                 <div class="sidebar--item">Pesanan Masuk</div>
             </a>
         </li>
         <li>
-            <a href="{{ route('orderProcess') }}" class="{{ request()->is('cms/order/OrderProcess') ? 'active' : '' }}">
+            <a href="{{ route('orderProcess') }}" class="{{ request()->is('cms/order/sub-orderProcess/OrderProcess/semua') ? 'active' : '' }}">
                 <span class="icon"><i class="ri-time-line"></i></span>
                 <div class="sidebar--item">Pesanan Diproses</div>
             </a>
         </li>
         <li>
-            <a href="{{ route('orderComplete') }}" class="{{ request()->is('cms/order/OrderComplete') ? 'active' : '' }}">
+            <a href="{{ route('orderComplete') }}" class="{{ request()->is('cms/order/sub-orderComplete/OrderComplete/semua') ? 'active' : '' }}">
                 <span class="icon"><i class="ri-checkbox-circle-line"></i></span>
                 <div class="sidebar--item">Pesanan Selesai</div>
             </a>
