@@ -76,11 +76,24 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
         });
 
         Route::prefix('order')->group(function () {
-            Route::get('/OrderIn', [OrderInController::class, 'index'])->name('orderIn');
-            Route::get('/OrderIn/Prosess/{id}', [OrderInController::class, 'btnAction'])->name('orderIn.action');
-            Route::get('/OrderProcess', [OrderProcessController::class, 'index'])->name('orderProcess');
-            Route::get('/OrderDetail', [OrderDetailController::class, 'index']);    
-            Route::get('/OrderComplete', [OrderCompleteController::class, 'index'])->name('orderComplete');
+            Route::prefix('sub-orderIn')->group(function () {
+                Route::get('/OrderIn/semua', [OrderInController::class, 'semua'])->name('orderIn');
+                Route::get('/OrderIn/delivery', [OrderInController::class, 'delivery'])->name('orderIn.delivery');
+                Route::get('/OrderIn/dineIn', [OrderInController::class, 'dineIn'])->name('orderIn.dineIn');
+                Route::get('/OrderIn/Prosess/{id}', [OrderInController::class, 'btnAction'])->name('orderIn.action');
+            });
+            Route::prefix('sub-orderProcess')->group(function () {
+                Route::get('/OrderProcess/semua', [OrderProcessController::class, 'semua'])->name('orderProcess');
+                Route::get('/OrderProcess/delivery', [OrderProcessController::class, 'delivery'])->name('orderProcess.delivery');
+                Route::get('/OrderProcess/dineIn', [OrderProcessController::class, 'dineIn'])->name('orderProcess.dineIn');
+                Route::get('/OrderProcess/Selesai/{id}', [OrderProcessController::class, 'btnAction'])->name('orderProcess.action');
+            });
+            Route::prefix('sub-orderComplete')->group(function () {
+                Route::get('/OrderComplete/semua', [OrderCompleteController::class, 'semua'])->name('orderComplete');
+                Route::get('/OrderComplete/delivery', [OrderCompleteController::class, 'delivery'])->name('orderComplete.delivery');
+                Route::get('/OrderComplete/dineIn', [OrderCompleteController::class, 'dineIn'])->name('orderComplete.dineIn');
+                Route::get('/OrderComplete/Selesai/{id}', [OrderCompleteController::class, 'btnAction'])->name('orderComplete.action');
+            });
         });
 
         Route::prefix('promo')->group(function () {

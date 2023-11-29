@@ -18,7 +18,6 @@
 
                 <div class="form-group mb-3">
                     <label for="image">Gambar</label>
-                    <img class="img-preview img-fluid mb-3 col-sm-5">
                     @if($products->image)
                     <img src="{{ asset('images/product/'. $products->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
                     @else

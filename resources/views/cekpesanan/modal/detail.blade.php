@@ -1,6 +1,6 @@
 @foreach ( $order as $item )
 <div class="modal fade" id="staticBackdropView{{ $item->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">>
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Pemesanan Detail</h5>
@@ -27,6 +27,16 @@
                     @endif
                     <tr>
                         <td>Opsi Pemesanan</td><td>:</td><td>{{ $item->delivery_option }}</td>
+                    </tr>
+                    <tr>
+                        <td>Opsi Pembayaran</td><td>:</td><td>{{ $item->payment_option }}</td>
+                    </tr>
+                    <tr>
+                        @if ($item->status_pembayaran == 'Sudah Dibayar')
+                            <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-success">{{ $item->status_pembayaran }}</span></td>
+                        @else
+                            <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-danger">{{ $item->status_pembayaran }}</span></td>
+                        @endif
                     </tr>
                     <tr>
                         @if ($item->status == 'Menunggu Diproses')
