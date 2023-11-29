@@ -9,17 +9,26 @@ use App\Models\Promo;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $category = Category::all();
 
-        $products = Product::where('status', 'Aktif')->get();
+        $query = Product::where('status', 'Aktif');
 
-        $promos = Promo::where('status','0')->get();
+        // Check if there is a search query
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
 
-        return view('product', compact('products','promos'));
+        $products = $query->get();
 
+        $promos = Promo::where('status', '0')->get();
 
+        return view('product', compact('products', 'promos'));
     }
-
+    
 }

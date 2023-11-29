@@ -24,7 +24,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                         <th>ID</th>
                         <th>Waktu Pemesanan</th>
                         <th>Nama</th>
                         <th>Nama Produk</th>

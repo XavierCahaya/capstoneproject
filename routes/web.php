@@ -37,6 +37,7 @@ Route::prefix('auth')->group(function () {
 Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
 Route::prefix('user')->group(function () {
     Route::get('/menu', [ProductController::class,'index'])->name('product');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::post('/checkout', [OrderController::class,'checkout'])->name('checkout');
     Route::get('category', [CategoryController::class, 'user'])->name('category.index');
     Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');

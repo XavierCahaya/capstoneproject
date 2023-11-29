@@ -20,10 +20,11 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <form action="#" method="GET">
+                <form action="{{ route('products.index') }}" method="GET">
                     <div class="input-group mb-4">
                         <input type="text" class="form-control" placeholder="Search..." name="search"
                             value="{{ request('search') }}">
@@ -33,10 +34,11 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-6 mb-4">
             <div class="row row-cols-md-2 row-cols-sm-1">
-                @foreach ($products as $product)
+                @forelse ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-8 my-2 d-flex justify-content-center">
                         <div class="card-product card">
                             <img src="{{ asset('images/product/'. $product->image) }}" class="card-img-top img-fluid" alt="ProdukImage">
@@ -50,17 +52,56 @@
                                 </div>
                                 <p class="card-text text-center" style="font-size: 15px">{{ $product->name }}</p>
                                 <div class="card-btn d-flex justify-content-between align-items-center">
-                                    <a href="#" class="btn btn-detail"
-                                        style="background-color:#1FD8CD; border-radius:10px; font-size:.8em;">Lihat
-                                        Detail</a>
+                                    <button type="button" class="btn btn-primary btn-detail" style="background-color:#1FD8CD; border-radius:10px; font-size:.8em;" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                                        data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}" data-product-description="{{ $product->description }}" data-product-image="{{ asset('images/product/'. $product->image) }}" data-product-price="{{ $product->price }}">
+                                        Lihat Detail
+                                    </button>
+
                                     <a href="#" class="btn btn-pesan btn-add-to-cart text-light"
                                         data-product-id="{{ $product->id }}" data-product-price="{{ $product->price }}"
                                         style="background-color:#0cc22a; border-radius:10px; font-size:1em;">Pesan</a>
                                 </div>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="row w-100">
+                                                    <div class="col-6">
+                                                        <div class="modal-title fs-5 text-start" id="exampleModalLabel">
+                                                            <p id="product-name"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 text-end fs-5">
+                                                        <div class="d-flex justify-content-end">
+                                                            <p class="mr-2">Rp</p>
+                                                            <p id="product-price"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-6 text-center">
+                                                        <img src="{{ asset('images/product/'. $product->image) }}" id="product-image" class="img-fluid">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p id="product-description"></p>
+                                                    </div>
+                                                </div>
+                                            </div>                                        
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                     
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    </div>   
+                    @empty
+                @endforelse
             </div>
         </div>
         <div class="col-lg-6">
@@ -100,7 +141,7 @@
                 </div>  
 
                 <div class="mb-3">
-                    <label for="orderer_name" class="form-label">Nama Pesanan</label>
+                    <label for="orderer_name" class="form-label">Nama Pemesan</label>
                     <input type="text" class="form-control" id="orderer_name" name="orderer_name" required>
                 </div>
 
@@ -131,6 +172,31 @@
 
     <script>
 
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+
+            document.querySelectorAll('.btn-detail').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var productId = this.getAttribute('data-product-id');
+                    var name = this.getAttribute('data-product-name');
+                    var description = this.getAttribute('data-product-description');
+                    var price = this.getAttribute('data-product-price');
+                    var imageSrc = this.getAttribute('data-product-image');
+
+                    document.getElementById('product-name').innerHTML = name;
+                    document.getElementById('product-description').innerHTML = description;
+                    document.getElementById('product-price').innerHTML = price;
+
+                    var productImage = document.getElementById('product-image');
+                    productImage.src = imageSrc;
+                    productImage.alt = name;
+
+                    modal.show();
+                });
+            });
+        });
+
+        
         // --- Logic Tampilan Pilihan Opsi Pemesanan ---
         document.addEventListener('DOMContentLoaded', function() {
             let deliveryOption = document.getElementById('delivery_option');
