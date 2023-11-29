@@ -27,6 +27,6 @@
     </div>
 </div>
 
-@include('cekpesanan.modal.delivery')
+@include('cekpesanan.modal.detail')
 
 @endsection
