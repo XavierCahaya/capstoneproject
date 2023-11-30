@@ -13,8 +13,8 @@ class OrderProcessController extends Controller
     public function semua()
     {
         $order = Order::where('status', 'Sedang Diproses')->get();
-        $orderPrcs = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.process.semua', compact('order' ,'orderPrcs'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.process.semua', compact('order' ,'orderDetail'));
     }
 
     public function delivery()
@@ -22,8 +22,8 @@ class OrderProcessController extends Controller
         $order = Order::where('status', 'Sedang Diproses')
                         ->where('delivery_option', 'delivery')
                         ->get();
-        $orderPrcs = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.process.delivery', compact('order' ,'orderPrcs'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.process.delivery', compact('order' ,'orderDetail'));
     }
 
     public function dineIn()
@@ -31,15 +31,36 @@ class OrderProcessController extends Controller
         $order = Order::where('status', 'Sedang Diproses')
                         ->where('delivery_option', 'dine-in')
                         ->get();
-        $orderPrcs = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.process.dineIn', compact('order' ,'orderPrcs'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.process.dineIn', compact('order' ,'orderDetail'));
     }
 
-    public function btnAction(Request $request ,$id)
+    public function btnActionSelesai(Request $request ,$id)
     {
         $order = Order::findOrFail($id);
         $order->update([
             'status' => 'Selesai',
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function btnActionDiantar(Request $request ,$id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update([
+            'status' => 'Sedang Diantar',
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function btnActionDibayar(Request $request ,$id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update([
+            'status' => 'Selesai',
+            'status_pembayaran' => 'Sudah Dibayar',
         ]);
 
         return redirect()->back();

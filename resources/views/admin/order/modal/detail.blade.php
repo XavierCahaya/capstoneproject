@@ -66,11 +66,6 @@
                     </tr> 
                 </table>
             </div>
-            @if ( $item->status_pembayaran == 'Belum Dibayar' && $item->delivery_option == 'delivery' )
-            <div class="modal-footer">
-                <a href="{{ route('konfirm.action', $item->id) }}" class="btn btn-success" type="submit">Konfirmasi</a>
-            </div>
-            @endif
         </div>
     </div>
 </div>

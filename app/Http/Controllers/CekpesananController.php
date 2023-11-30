@@ -28,4 +28,15 @@ class CekpesananController extends Controller
         $orderDetail = OrderDetail::with('product', 'order')->get();
         return view('cekpesanan.dineIn', compact('order', 'orderDetail'));
     }
+
+    public function btnKonfirmasi(Request $request ,$id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update([
+            'status' => 'Selesai',
+            'status_pembayaran' => 'Sudah Dibayar',
+        ]);
+
+        return redirect()->back();
+    }
 }

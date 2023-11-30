@@ -38,8 +38,8 @@
                 @endif
             </td>
             <td>
-                <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"">  
-                    Detail                 
+                <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}">  
+                    <i class="ri-file-list-fill"></i>             
                 </a>
             </td>
         </tr>

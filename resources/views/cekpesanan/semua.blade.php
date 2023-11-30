@@ -39,7 +39,7 @@
             </td>
             <td>
                 <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"">  
-                    Detail                 
+                    <i class="ri-file-list-fill"></i>              
                 </a>
             </td>
         </tr>

@@ -12,8 +12,8 @@ class OrderCompleteController extends Controller
     public function semua()
     {
         $order = Order::where('status', 'Selesai')->get();
-        $orderCmp = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.complete.semua', compact('order' ,'orderCmp'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.complete.semua', compact('order' ,'orderDetail'));
     }
 
     public function delivery()
@@ -21,8 +21,8 @@ class OrderCompleteController extends Controller
         $order = Order::where('status', 'Selesai')
                         ->where('delivery_option', 'delivery')
                         ->get();
-        $orderCmp = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.complete.delivery', compact('order' ,'orderCmp'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.complete.delivery', compact('order' ,'orderDetail'));
     }
 
     public function dineIn()
@@ -30,8 +30,8 @@ class OrderCompleteController extends Controller
         $order = Order::where('status', 'Selesai')
                         ->where('delivery_option', 'dine-in')
                         ->get();
-        $orderCmp = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.complete.dineIn', compact('order' ,'orderCmp'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.complete.dineIn', compact('order' ,'orderDetail'));
     }
 
     public function btnAction(Request $request ,$id)

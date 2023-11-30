@@ -12,8 +12,8 @@ class OrderInController extends Controller
     public function semua()
     {
         $order = Order::where('status', 'Menunggu Diproses')->get();
-        $orderIn = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.in.semua', compact('order' ,'orderIn'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.in.semua', compact('order' ,'orderDetail'));
     }
 
     public function delivery()
@@ -21,8 +21,8 @@ class OrderInController extends Controller
         $order = Order::where('status', 'Menunggu Diproses')
                         ->where('delivery_option', 'delivery')
                         ->get();
-        $orderIn = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.in.delivery', compact('order' ,'orderIn'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.in.delivery', compact('order' ,'orderDetail'));
     }
 
     public function dineIn()
@@ -30,8 +30,8 @@ class OrderInController extends Controller
         $order = Order::where('status', 'Menunggu Diproses')
                         ->where('delivery_option', 'dine-in')
                         ->get();
-        $orderIn = OrderDetail::with('product', 'order')->get();
-        return view('admin.order.in.dineIn', compact('order' ,'orderIn'));
+        $orderDetail = OrderDetail::with('product', 'order')->get();
+        return view('admin.order.in.dineIn', compact('order' ,'orderDetail'));
     }
 
     public function btnAction(Request $request ,$id)
