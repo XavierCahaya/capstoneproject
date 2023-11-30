@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <div class="wrapper">
-        <section class="home" id="home">
+        <section class="home" id="home" style="background-image: url('{{ asset('image/Background.png') }}');">
             <div class="content">
                 <div class="text-section">
                     <h3 class="welcome-text">Welcome</h3>
@@ -13,7 +13,7 @@
                     <p>A place where deliciousness meets comfort! Discover a unique culinary experience with a selection
                         of delicious noodles, fresh juices, and savory snacks. Immediately try the deliciousness we
                         offer!</p>
-                    <a href="" class="btn order-btn">Order now</a>
+                    <a href="{{ route('menu') }}" class="btn order-btn">Order now</a>
                 </div>
 
                 <div class="logo-section">
@@ -22,7 +22,7 @@
             </div>
         </section>
 
-        <div class="categorySection">
+        <div class="superioritySection">
             <div class="container">
                 <h1>
                     <span><b>Keunggulan</b></span>
