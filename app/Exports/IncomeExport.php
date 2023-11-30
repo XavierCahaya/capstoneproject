@@ -1,59 +1,60 @@
 <?php
 
+// App\Exports\OrdersExport.php
+
 namespace App\Exports;
 
+use App\Models\Order;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
-
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class IncomeExport implements FromCollection, WithHeadings, WithStyles
 {
-    protected $incomeData;
+    protected $orders;
 
-    public function __construct($incomeData)
+    public function __construct($orders)
     {
-        $this->incomeData = $incomeData;
+        $this->orders = $orders;
     }
 
     public function collection()
     {
-        // Hitung total pemasukan
-        $totalPemasukan = $this->incomeData->sum('subtotal');
-
-        // Buat koleksi dengan data dan total pemasukan
-        $koleksi = $this->incomeData->map(function ($item, $loop) {
+        // Make sure that $this->orders is a Collection
+        $koleksi = collect($this->orders)->map(function ($item, $key) {
             return [
-                'No' => $loop + 1,
-                'Nama Pemesan' => $item->order->orderer_name,
-                'Nama Produk' => $item->product->name,
-                'Jumlah Pesanan' => $item->qty,
-                'Total Pembayaran' => $item->subtotal,
+                'No' => $key + 1,
                 'Tanggal' => $item->updated_at->format('Y-m-d H:i:s'),
+                'Metode Pemesanan' => $item->delivery_option,
+                'Nama Pemesan' => $item->orderer_name,
+                'Status' => $item->status,
+                'Total Pembayaran' => $item->total_price,
             ];
         });
 
-        // Tambahkan baris total pemasukan sebelum baris total pembayaran
+        // Add a row for total income before the total payment row
         $koleksi->push([
             'No' => '',
-            'Nama Pemesan' => '',
-            'Nama Produk' => 'Total Pemasukan',
-            'Jumlah Pesanan' => '', // Kosongkan total pembayaran di sini
-            'Total Pembayaran' => '', // Kosongkan total pembayaran di sini
             'Tanggal' => '',
+            'Metode Pemesanan' => '',
+            'Nama Pemesan' => 'Total Pemasukan',
+            'Status' => '', // Leave total payment empty here
+            'Total Pembayaran' => '', // Leave total payment empty here
         ]);
 
-        // Tambahkan baris total pembayaran di bawah baris total pemasukan
+        // Add a row for total payment below the total income row
         $koleksi->push([
             'No' => '',
-            'Nama Pemesan' => '',
-            'Nama Produk' => '',
-            'Jumlah Pesanan' => '',
-            'Total Pembayaran' => '',
             'Tanggal' => '',
+            'Metode Pemesanan' => '',
+            'Nama Pemesan' => '',
+            'Status' => '',
+            'Total Pembayaran' => '',
         ]);
 
         return $koleksi;
@@ -63,27 +64,27 @@ class IncomeExport implements FromCollection, WithHeadings, WithStyles
     {
         return [
             'No',
-            'Nama Pemesan',
-            'Nama Produk',
-            'Jumlah Pesanan',
-            'Total Pembayaran',
             'Tanggal',
+            'Metode Pemesanan',
+            'Nama Pemesan',
+            'Status',
+            'Total Pembayaran',
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
-        // Deklarasikan $totalPemasukan
-        $totalPemasukan = $this->incomeData->sum('subtotal');
-        // Terapkan gaya ke baris header
+        $totalPemasukan = $this->orders->sum('total_price');
+
         $sheet->getStyle('A1:F1')->applyFromArray([
             'font' => [
                 'bold' => true,
+                'color' => ['rgb' => 'FFFFFF'],
             ],
             'fill' => [
-                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'fillType' => Fill::FILL_SOLID,
                 'startColor' => [
-                    'rgb' => 'a9a9a9', // Warna latar belakang header
+                    'rgb' => '3498db',
                 ],
             ],
             'borders' => [
@@ -93,8 +94,7 @@ class IncomeExport implements FromCollection, WithHeadings, WithStyles
             ],
         ]);
 
-        // Terapkan gaya ke baris data
-        $sheet->getStyle('A2:F' . ($this->incomeData->count() + 2))->applyFromArray([
+        $sheet->getStyle('A2:F' . ($this->orders->count() + 2))->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => Border::BORDER_THIN,
@@ -102,47 +102,41 @@ class IncomeExport implements FromCollection, WithHeadings, WithStyles
             ],
         ]);
 
-        // Format merge dan center untuk baris total pemasukan (baris terakhir)
-        $totalPemasukanRow = $this->incomeData->count() + 2;
-        $sheet->mergeCells("A{$totalPemasukanRow}:C{$totalPemasukanRow}");
-        $sheet->getStyle("A{$totalPemasukanRow}:C{$totalPemasukanRow}")->applyFromArray([
+        $sheet->mergeCells('A' . ($this->orders->count() + 2) . ':C' . ($this->orders->count() + 2));
+        $sheet->getStyle('A' . ($this->orders->count() + 2) . ':C' . ($this->orders->count() + 2))->applyFromArray([
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ]);
 
-        // Set nilai di dalam sel 'Total Pemasukan'
-        $sheet->setCellValue("A{$totalPemasukanRow}", 'Total Pemasukan');
-        $sheet->getStyle("A{$totalPemasukanRow}")->applyFromArray([
+        $sheet->setCellValue('A' . ($this->orders->count() + 2), 'Total Pemasukan');
+        $sheet->getStyle('A' . ($this->orders->count() + 2))->applyFromArray([
             'font' => [
                 'bold' => true,
             ],
         ]);
 
-        // Format merge dan center untuk baris total pemasukan (baris terakhir)
-        $totalPembayaranRow = $this->incomeData->count() + 2;
-        $sheet->mergeCells("D{$totalPembayaranRow}:F{$totalPembayaranRow}");
-        $sheet->getStyle("D{$totalPembayaranRow}:F{$totalPembayaranRow}")->applyFromArray([
+        $sheet->mergeCells('D' . ($this->orders->count() + 2) . ':E' . ($this->orders->count() + 2));
+        $sheet->getStyle('D' . ($this->orders->count() + 2) . ':E' . ($this->orders->count() + 2))->applyFromArray([
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ]);
 
-        // Set nilai di dalam sel 'Total Pembayaran'
-        $sheet->setCellValue("D{$totalPembayaranRow}", $totalPemasukan);
-        $sheet->getStyle("D{$totalPembayaranRow}")->applyFromArray([
+        $sheet->setCellValue('D' . ($this->orders->count() + 2), $totalPemasukan);
+        $sheet->getStyle('D' . ($this->orders->count() + 2))->applyFromArray([
             'font' => [
                 'bold' => true,
             ],
         ]);
 
-        // Atur lebar kolom berdasarkan kontennya
         foreach (range('A', 'F') as $column) {
             $sheet->getColumnDimension($column)->setAutoSize(true);
         }
 
         return [];
     }
+
 }

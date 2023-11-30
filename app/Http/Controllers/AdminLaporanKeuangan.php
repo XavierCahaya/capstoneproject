@@ -4,61 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Exports\IncomeExport;
 use App\Models\Order;
-use App\Models\OrderDetail;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use Carbon\Carbon;
-
-// class AdminLaporanKeuangan extends Controller
-// {
-//     public function index(){
-//         $product = Product::all();
-//         $order = Order::all();
-//         $income_data = OrderDetail::all();
-//         return view('admin.laporan_keuangan.index', compact('product','order','income_data'));
-//     }
-
-//     public function export()
-//     {
-//         // Eager load the user relationship for export (opsional)
-//         $income_data = OrderDetail::with('product')->get();
-
-//         return Excel::download(new IncomeExport($income_data), 'income_data.xlsx');
-//     }
-// }
-
+use Illuminate\Support\Carbon;
 
 
 class AdminLaporanKeuangan extends Controller
 {
+
     public function index(Request $request)
     {
-        $product = Product::all();
-        $order = Order::all();
-        $income_data = OrderDetail::all();
+        // Fetch only the orders with the "Selesai" status
+        $income_data = Order::where('status', 'Selesai')->get();
 
-        // Check if a date is provided in the request
-        if ($request->has('date')) {
-            $selectedDate = Carbon::parse($request->input('date'))->toDateString();
-            $income_data = OrderDetail::whereDate('updated_at', $selectedDate)->get();
-        }
-
-        return view('admin.laporan_keuangan.index', compact('product', 'order', 'income_data'));
+        return view('admin.laporan_keuangan.index', compact('income_data'));
     }
+
+    // public function export(Request $request)
+    // {
+    //     // Fetch only the orders with the "Selesai" status
+    //     $income_data = Order::where('status', 'Selesai')->get();
+
+    //     return Excel::download(new IncomeExport($income_data), 'income_data.xlsx');
+    // }
 
     public function export(Request $request)
     {
-        // Eager load the user relationship for export (optional)
-        $income_data = OrderDetail::with('product');
+        $export_date = $request->input('export_date');
 
-        // Check if a date is provided in the request
-        if ($request->has('date')) {
-            $selectedDate = Carbon::parse($request->input('date'))->toDateString();
-            $income_data = $income_data->whereDate('updated_at', $selectedDate);
+        $query = Order::where('status', 'Selesai');
+
+        if ($export_date) {
+            // Add a filter for the selected date
+            $query->whereDate('updated_at', $export_date);
         }
 
-        $income_data = $income_data->get();
+        $income_data = $query->get();
 
         return Excel::download(new IncomeExport($income_data), 'income_data.xlsx');
     }
