@@ -1,6 +1,10 @@
 <nav class="navbar sticky-top navbar-expand-lg px-3">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('beranda') }}">N'Jajan</a>
+
+
+        <a class="navbar-brand" href="{{ route('beranda') }}">
+            <img src="{{ asset('image/logo.png')}}" alt="Logo">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-bs-theme="light">
             <span class="navbar-toggler-icon"></span>
         </button>
