@@ -4,6 +4,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rasa:wght@300&display=swap');
 
+body {
+    margin: 0;
+}
 
 section {
     padding: 2rem 7%;
@@ -17,12 +20,11 @@ section {
     font-size: 3rem;
 }
 
-
 .home {
     min-height: 100vh;
+    height: auto;
     display: flex;
     align-items: center;
-    background-color: #000;
     background-size: cover;
     background-position: center;
 }
@@ -45,15 +47,21 @@ section {
     display: inline-block;
     padding: 0.5rem 1.9rem;
     font-size: 1.2rem;
-    color: #fff;
-    background: #fc3e24;
+    color: #000000;
+    background: #fce324;
+    font-weight: 500;
     cursor: pointer;
+    border-radius: 20px;
+    transition: background 0.3s, color 0.3s;
+    border: 2px solid transparent;
 }
 
-.btn.order-btn:hover {
+.btn.order-btn:hover,
+.btn.order-btn:active {
     letter-spacing: 0.2rem;
-    background: #fff;
-    color: var(--main-color);
+    background: #FC3E24;
+    color: #000000;
+    border-color: #fcdf24;
 }
 
 .welcome-text {
@@ -61,7 +69,7 @@ section {
     font-size: 4rem;
     margin-bottom: 10px;
     font-family: 'Playball', cursive;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
     margin-left: 200px;
 }
 
@@ -71,16 +79,16 @@ section {
     text-transform: lowercase;
     margin-bottom: 10px;
     font-family: 'Playball', cursive;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
     margin-left: 270px;
 }
 
 .njajaners-text {
-    color: #fc3e24;
+    color: #fcdf24;
     font-size: 3rem;
     margin-bottom: 10px;
     font-family: 'Alfa Slab One', cursive;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
     margin-left: 140px;
 }
 
@@ -93,22 +101,20 @@ section {
     margin: auto;
 }
 
-.categorySection {
+.superioritySection {
     padding-top: 1%;
     background-color: #ffffff;
     padding-bottom: 6%;
 }
 
-
-
-.categorySection .container h1 {
+.superioritySection .container h1 {
     text-align: center;
     margin: 35px auto;
 }
 
-.categorySection .container h1 b {
+.superioritySection .container h1 b {
     font-size: 2.2rem;
-    color: #fb4646;
+    color: #FC3E24;
     text-transform: uppercase;
     font-weight: bold;
     margin-top: 20px;
@@ -117,25 +123,23 @@ section {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.categorySection .container h1 b::after {
+.superioritySection .container h1 b::after {
     content: "";
     display: block;
     width: 40px;
     height: 2px;
-    background-color: #fc3e24;
-    /* Warna garis bawah */
+    background-color: #FC3E24;
     margin: 10px auto;
-    /* Atur jarak dari teks */
 }
-
 
 .product-box-layout4 {
     padding: 30px;
     background-color: #ffffff;
     position: relative;
     z-index: 2;
-    margin-bottom: 4rem;
+    width: 90%;
 }
+
 
 .product-box-layout4:before {
     content: "";
@@ -144,7 +148,7 @@ section {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: #fb4646;
+    background-color: #FC3E24;
     z-index: -1;
     transform: rotate(0deg);
 }
@@ -156,6 +160,12 @@ section {
     height: 300px;
     width: 100%;
     cursor: pointer;
+}
+
+.product-box-layout4 .item-figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .product-box-layout4 .item-content {
@@ -178,7 +188,7 @@ section {
     -ms-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    border: 0.1rem solid #f7a3a3;
+    border: 0.1rem solid #000000;
 }
 
 .product-box-layout4:hover:after {
@@ -187,8 +197,8 @@ section {
 
 .card-title {
     font-family: 'Rasa', cursive;
-    font-size: 2.3rem; 
-    color: #000; 
+    font-size: 2.3rem;
+    color: #000000;
     font-weight: bold;
 }
 
@@ -202,47 +212,124 @@ section {
 
 .text-section {
     max-width: 50%;
-
 }
 
 .logo-section {
     float: right;
+    width: 330px;
+    height: auto;
 }
 
-.welcome-text, .to-text, .njajaners-text {
-    margin-left: 0; 
+.welcome-text,
+.to-text,
+.njajaners-text {
+    margin-left: 0;
 }
 
 .card-title {
     font-family: 'Rasa', cursive;
-    font-size: 2rem; /* Ganti dengan ukuran font yang diinginkan */
-    color: #000;
+    font-size: 2rem;
+    color: #000000;
     font-weight: bold;
-    text-align: center; /* Menengahkan teks */
+    text-align: center;
 }
 
-/* Gaya untuk seluruh teks h2 di dalam .item-content */
 .item-content h2 {
     font-family: 'Rasa', cursive;
-    font-size: 1.5rem; /* Ganti dengan ukuran font yang diinginkan */
+    font-size: 1.5rem;
     color: #000;
     font-weight: bold;
-    text-align: center; /* Menengahkan teks */
+    text-align: center;
 }
-/* Profile End */
-
-/* Menu Start */
-
-/* Menu End */
-
-/* Kategori Start */
-
-/* Kategori End */
-
-/* Cek Pesanan Start */
 
 .cekpesanan {
     margin: 12rem 0rem;
 }
 
-/* Cek Pesanan ENd */
+@media only screen and (max-width: 767px) {
+    section.home {
+        padding: 2rem;
+    }
+
+    .content {
+        flex-direction: column-reverse;
+        flex-direction: column;
+        text-align: center;
+        max-width: none;
+    }
+
+    .logo-section {
+        float: none;
+        width: 50%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        order: -1;
+    }
+
+    .text-section {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .home .content p {
+        font-size: 1.2rem;
+    }
+
+    .welcome-text,
+    .to-text,
+    .njajaners-text {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .logo-section img,
+    .item-figure img {
+        max-width: 100%;
+        height: auto;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .welcome-text {
+        font-size: 2.5rem;
+    }
+
+    .to-text,
+    .njajaners-text {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .superioritySection .container h1 b {
+        font-size: 1.8rem;
+        max-width: 50%;
+    }
+
+    .superioritySection .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-box-layout4 {
+        padding: 15px;
+        width: 70%;
+    }
+
+    .product-box-layout4 .item-content {
+        padding: 15px 0 0;
+    }
+
+    .superioritySection .col-lg-4,
+    .superioritySection .col-sm-4,
+    .superioritySection .col-4 {
+        width: 100%;
+        margin-bottom: 60px;
+    }
+
+    .superioritySection .product-box-layout4 {
+        padding: 20px;
+        margin: 0 auto;
+    }
+}
