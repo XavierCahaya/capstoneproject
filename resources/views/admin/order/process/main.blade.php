@@ -26,6 +26,8 @@
     </div>
 </div>
     
+@include('admin.order.modal.detail')
+
 @endsection
 
     

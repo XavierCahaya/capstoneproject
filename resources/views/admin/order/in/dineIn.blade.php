@@ -16,30 +16,30 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($order as $index => $order)
+        @foreach($order as $index => $od)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $order->created_at }}</td>
-                <td>{{ $order->delivery_option }}</td>
-                <td>{{ $order->orderer_name }}</td>
-                <td>{{ $order->phone  ?: '-' }}</td>
-                <td>{{ $order->address  ?: '-' }}</td>
-                <td>{{ $order->getTotalItemsAttribute() }}</td>
+                <td>{{ $od->created_at }}</td>
+                <td>{{ $od->delivery_option }}</td>
+                <td>{{ $od->orderer_name }}</td>
+                <td>{{ $od->phone  ?: '-' }}</td>
+                <td>{{ $od->address  ?: '-' }}</td>
+                <td>{{ $od->getTotalItemsAttribute() }}</td>
                 <td>
-                    @if ($order->status == 'Menunggu Diproses')
-                        <span class="badge text-bg-warning">{{ $order->status }}</span>
-                    @elseif ($order->status == 'Sedang Diproses')
-                        <span class="badge text-bg-info">{{ $order->status }}</span>
-                    @elseif ($order->status == 'Selesai')
-                        <span class="badge text-bg-success">{{ $order->status }}</span>
+                    @if ($od->status == 'Menunggu Diproses')
+                        <span class="badge text-bg-warning">{{ $od->status }}</span>
+                    @elseif ($od->status == 'Sedang Diproses')
+                        <span class="badge text-bg-info">{{ $od->status }}</span>
+                    @elseif ($od->status == 'Selesai')
+                        <span class="badge text-bg-success">{{ $od->status }}</span>
                     @else
-                        <span class="badge text-bg-secondary">{{ $order->status }}</span>
+                        <span class="badge text-bg-secondary">{{ $od->status }}</span>
                     @endif
                 </td>
                 <td>
-                    <button class="btn btn-warning">Detail</button>
-                    <a href="{{ route('orderIn.action', $order->id) }}">
-                        <button type="submit" class="btn btn-success">Terima</button>
+                    <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"><i class="ri-file-list-fill"></i></a>
+                    <a href="{{ route('orderIn.action', $od->id) }}">
+                        <button type="submit" class="btn btn-success"><i class="ri-checkbox-fill"></i></button>
                     </a>
                 </td>
             </tr>

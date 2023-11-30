@@ -13,7 +13,7 @@
                     <p>A place where deliciousness meets comfort! Discover a unique culinary experience with a selection
                         of delicious noodles, fresh juices, and savory snacks. Immediately try the deliciousness we
                         offer!</p>
-                    <a href="{{ route('menu') }}" class="btn order-btn">Order now</a>
+                    <a href="{{ route('product') }}" class="btn order-btn">Order now</a>
                 </div>
 
                 <div class="logo-section">

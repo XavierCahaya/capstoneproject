@@ -17,10 +17,6 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\OrderProcessController;
 use App\Http\Controllers\OrderCompleteController;
 
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,7 +35,6 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
-Route::get('menu', [ProductController::class, 'index'])->name('menu');
 Route::prefix('user')->group(function () {
     Route::get('/menu', [ProductController::class,'index'])->name('product');
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -50,6 +45,7 @@ Route::prefix('user')->group(function () {
         Route::get('/semua', [CekpesananController::class, 'semua'])->name('cek.semua');
         Route::get('/delivery', [CekpesananController::class, 'delivery'])->name('cek.delivery');
         Route::get('/dineIn', [CekpesananController::class, 'dineIn'])->name('cek.dineIn');
+        Route::get('/konfirmasi/{id}', [CekpesananController::class, 'btnKonfirmasi'])->name('konfirm.action');
     });
 });
 
@@ -91,7 +87,9 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
                 Route::get('/OrderProcess/semua', [OrderProcessController::class, 'semua'])->name('orderProcess');
                 Route::get('/OrderProcess/delivery', [OrderProcessController::class, 'delivery'])->name('orderProcess.delivery');
                 Route::get('/OrderProcess/dineIn', [OrderProcessController::class, 'dineIn'])->name('orderProcess.dineIn');
-                Route::get('/OrderProcess/Selesai/{id}', [OrderProcessController::class, 'btnAction'])->name('orderProcess.action');
+                Route::get('/OrderProcess/Diantar/{id}', [OrderProcessController::class, 'btnActionDiantar'])->name('orderProcess.actionDiantar');
+                Route::get('/OrderProcess/Dibayar/{id}', [OrderProcessController::class, 'btnActionDibayar'])->name('orderProcess.actionDibayar');
+                Route::get('/OrderProcess/Selesai/{id}', [OrderProcessController::class, 'btnActionSelesai'])->name('orderProcess.actionSelesai');
             });
             Route::prefix('sub-orderComplete')->group(function () {
                 Route::get('/OrderComplete/semua', [OrderCompleteController::class, 'semua'])->name('orderComplete');
