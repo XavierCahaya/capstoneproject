@@ -286,6 +286,11 @@ a.active {
     border-radius: 5px 5px 0 0;
 }
 
+.cardCount {
+    font-size: 2em;
+    font-weight: 700;
+}
+
 /* responsive starts here */
 @media screen and (max-width: 2561px) {
     .sidebar {

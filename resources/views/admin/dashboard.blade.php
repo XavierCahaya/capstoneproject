@@ -11,9 +11,10 @@
             </div>
             <div class="card-body">
                 @if($pesananMasuk > 0)
-                <p class="card-text text-center">{{ $pesananMasuk }} Pesanan</p>
+                <p class="cardCount card-text text-center m-0">{{ $pesananMasuk }}</p>
+                <p class="card-text text-center">Pesanan</p>
                 @else
-                <p class="card-text text-center">Belum Ada Pesanan</p> 
+                <p class="card-text text-center my-4">Belum Ada Pesanan</p> 
                 @endif
             </div>
             <ul class="list-group list-group-flush">
@@ -35,9 +36,10 @@
             </div>
             <div class="card-body">
                 @if($pesananDiproses > 0)
-                <p class="card-text text-center">{{ $pesananDiproses }} Pesanan</p>
+                <p class="cardCount card-text text-center m-0">{{ $pesananDiproses }}</p>
+                <p class="card-text text-center">Pesanan</p>
                 @else
-                <p class="card-text text-center">Belum Ada Pesanan</p> 
+                <p class="card-text text-center my-4">Belum Ada Pesanan</p> 
                 @endif
             </div>
             <ul class="list-group list-group-flush">
@@ -59,9 +61,10 @@
             </div>
             <div class="card-body">
                 @if($pesananSelesai > 0)
-                <p class="card-text text-center">{{ $pesananSelesai }} Pesanan</p>
+                <p class="cardCount card-text text-center m-0">{{ $pesananSelesai }}</p>
+                <p class="card-text text-center">Pesanan</p>
                 @else
-                <p class="card-text text-center">Belum Ada Pesanan</p> 
+                <p class="card-text text-center my-4">Belum Ada Pesanan</p> 
                 @endif
             </div>
             <ul class="list-group list-group-flush">
