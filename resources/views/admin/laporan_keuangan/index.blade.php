@@ -2,24 +2,21 @@
 
 @section('container')
     <div class="row mt-4">
-        {{-- <div class="col-lg-12 col-md-12 col-12">
-            <div class="border-bottom pb-3 mb-3 d-md-flex align-items-center justify-content-between">
-                <div class="mb-3 mb-md-0">
-                    <h1 class="mb-1 h2 fw-bold">Data Pemasukan</h1>
-                </div>
-                <div>
-                    <a href="{{ route('exportlaporan') }}" class="btn btn-primary">Export Data</a>
-                </div>
-            </div>
-        </div> --}}
         <div class="mb-3 mb-md-0">
-            <h1 class="mb-1 h2 fw-bold">Data Pemasukan</h1>
+            <h1 class="mb-1 h2 fw-bold text-center">Data Pemasukan</h1>
         </div>
         <div>
-            <form action="{{ route('exportlaporan') }}" method="get">
-                <div class="input-group">
-                    <input type="date" class="form-control" name="date">
-                    <button type="submit" class="btn btn-primary">Export Data</button>
+            <form action="{{ route('exportlaporan') }}" method="get" class="mb-2">
+                <div class="row g-2 align-items-center mt-4">
+                    <div class="col-auto">
+                        <label for="export_date" class="col-form-label">Pilih Tanggal:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" name="export_date" id="export_date" class="form-control">
+                    </div>
+                    <div class="col-auto ms-auto">
+                        <button type="submit" class="btn btn-primary">Export Data</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -35,9 +32,9 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
+                                <th>Metode Pemesanan</th>
                                 <th>Nama Pemesan</th>
-                                <th>Nama Produk</th>
-                                <th>Jumlah Pesanan</th>
+                                <th>status</th>
                                 <th>Total Pembayaran</th>
                             </tr>
                         </thead>
@@ -55,21 +52,21 @@
                                         {{ $income->updated_at }}
                                     </td>
                                     <td>
-                                        {{ $income->order->orderer_name }}
+                                        {{ $income->delivery_option }}
                                     </td>
                                     <td>
-                                        {{ $income->product->name }}
+                                        {{ $income->orderer_name }}
                                     </td>
                                     <td>
-                                        {{ $income->qty }}
+                                        {{ $income->status }}
                                     </td>
                                     <td>
-                                        Rp. {{ number_format($income->subtotal, 0, '.', '.') }}
+                                        Rp. {{ number_format($income->total_price, 0, '.', '.') }}
                                     </td>
                                 </tr>
 
                                 @php
-                                    $total_income += $income->subtotal;
+                                    $total_income += $income->total_price;
                                 @endphp
                             @endforeach
                         </tbody>
