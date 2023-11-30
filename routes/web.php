@@ -17,6 +17,10 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\OrderProcessController;
 use App\Http\Controllers\OrderCompleteController;
 
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +39,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::get('/', [profilecontroller::class, 'index'])->name('beranda');
+Route::get('menu', [ProductController::class, 'index'])->name('menu');
 Route::prefix('user')->group(function () {
     Route::get('/menu', [ProductController::class,'index'])->name('product');
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
