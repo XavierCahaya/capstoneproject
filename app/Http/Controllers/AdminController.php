@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,7 +11,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.layouts.main');
+        $pesananMasuk = Order::where('status', 'Menunggu Diproses')->count();
+        $pesananDiproses = Order::whereIn('status', ['Sedang Diproses', 'Sedang Diantar'])->count();
+        $pesananSelesai = Order::where('status', 'Selesai')->count();
+
+        return view('admin.dashboard', compact('pesananMasuk', 'pesananDiproses', 'pesananSelesai'));
     }
 
     /**

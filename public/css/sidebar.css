@@ -136,15 +136,6 @@ i.sun {
     height: 40px;
 }
 
-/* img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-} */
-
 .logout {
     margin-left: 20px;
 }
@@ -265,6 +256,36 @@ a.active {
     overflow-y: auto; /* Add scrollbar if content overflows */
 }
 
+
+/* ------ Dashboard ------------- */
+.containerCard{
+    gap: 20px;
+}
+
+.containerCard i{
+    font-size: 30px;
+}
+
+.headOrderIn{
+    height: 100px;
+    width: 100%;
+    background-color: var(--bg-color-fourth);
+    border-radius: 5px 5px 0 0;
+}
+
+.headOrderProcess{
+    height: 100px;
+    width: 100%;
+    background-color: rgb(227, 176, 7);
+    border-radius: 5px 5px 0 0;
+}
+.headOrderDone{
+    height: 100px;
+    width: 100%;
+    background-color: rgb(15, 177, 15);
+    border-radius: 5px 5px 0 0;
+}
+
 /* responsive starts here */
 @media screen and (max-width: 2561px) {
     .sidebar {
@@ -351,3 +372,10 @@ a.active {
         display: none;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .containerCard{
+        flex-direction: column; 
+    }
+}
+
