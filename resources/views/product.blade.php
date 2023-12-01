@@ -349,7 +349,9 @@
                         removeButton.click();
                     }
                 }
-                updateCheckoutButtonStatus();
+                updateTotal();
+                updateCheckoutButtonStatus()
+                prepareFormData();
             });
 
             function updateTotal() {                
