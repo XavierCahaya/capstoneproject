@@ -107,10 +107,12 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
             Route::put('/promo/{id}', [PromoController::class, 'update'])->name('update.promo');
             Route::get('/promo/delete/{id}', [PromoController::class, 'destroy'])->name('delete.promo');
         });
-    
+
         Route::get('/laporan-keuangan', [AdminLaporanKeuangan::class, 'index'])->name('laporankeuangan');
         Route::get('/export', [AdminLaporanKeuangan::class, 'export'])->name('exportlaporan');
 
     });
 
 });
+
+Route::get('/webhooks/midtrans', [OrderController::class, 'webHook']);

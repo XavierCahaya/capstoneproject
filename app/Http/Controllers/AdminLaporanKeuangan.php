@@ -6,7 +6,6 @@ use App\Exports\IncomeExport;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Carbon;
 
 
 class AdminLaporanKeuangan extends Controller
@@ -19,14 +18,6 @@ class AdminLaporanKeuangan extends Controller
 
         return view('admin.laporan_keuangan.index', compact('income_data'));
     }
-
-    // public function export(Request $request)
-    // {
-    //     // Fetch only the orders with the "Selesai" status
-    //     $income_data = Order::where('status', 'Selesai')->get();
-
-    //     return Excel::download(new IncomeExport($income_data), 'income_data.xlsx');
-    // }
 
     public function export(Request $request)
     {

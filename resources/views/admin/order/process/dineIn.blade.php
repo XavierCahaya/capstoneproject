@@ -38,11 +38,11 @@
                 </td>
                 <td>
                     <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"><i class="ri-file-list-fill"></i></a>
-                    @if ($od->delivery_option == 'dine-in' && $od->status_pembayaran == 'Belum Dibayar')
+                    @if ($od->delivery_option == 'dine-in' && $od->status_pembayaran == 'pending')
                     <a href="{{ route('orderProcess.actionDibayar', $od->id) }}">
                         <button class="btn btn-success"><i class="ri-money-dollar-box-fill"></i></button>
                     </a>
-                    @elseif ($od->delivery_option == 'dine-in' && $od->status_pembayaran == 'Sudah Dibayar')
+                    @elseif ($od->delivery_option == 'dine-in' && $od->status_pembayaran == 'capture')
                     <a href="{{ route('orderProcess.actionSelesai', $od->id) }}">
                         <button type="submit" class="btn btn-success"><i class="ri-check-double-line"></i></button>
                     </a>

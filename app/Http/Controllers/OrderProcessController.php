@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class OrderProcessController extends Controller
 {
-    
+
     public function semua()
     {
         $order = Order::where('status', 'Sedang Diproses')->get();
@@ -60,7 +60,7 @@ class OrderProcessController extends Controller
         $order = Order::findOrFail($id);
         $order->update([
             'status' => 'Selesai',
-            'status_pembayaran' => 'Sudah Dibayar',
+            'status_pembayaran' => 'capture',
         ]);
 
         return redirect()->back();
