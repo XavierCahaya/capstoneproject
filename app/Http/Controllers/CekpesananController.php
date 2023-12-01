@@ -20,7 +20,7 @@ class CekpesananController extends Controller
         $order = Order::where('delivery_option', 'delivery')->get();
         $orderDetail = OrderDetail::with('product', 'order')->get();
         return view('cekpesanan.delivery', compact('order', 'orderDetail'));
-    }    
+    }
 
     public function dineIn()
     {
@@ -34,7 +34,7 @@ class CekpesananController extends Controller
         $order = Order::findOrFail($id);
         $order->update([
             'status' => 'Selesai',
-            'status_pembayaran' => 'Sudah Dibayar',
+            'status_pembayaran' => 'capture',
         ]);
 
         return redirect()->back();

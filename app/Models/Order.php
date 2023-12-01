@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'delivery_option',
         'orderer_name',
@@ -18,9 +18,10 @@ class Order extends Model
         'payment_option',
         'status_pembayaran',
         'status',
+        'checkout_link',
+        'order_id'
     ];
 
-    
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);

@@ -32,7 +32,7 @@
                         <td>Opsi Pembayaran</td><td>:</td><td>{{ $item->payment_option }}</td>
                     </tr>
                     <tr>
-                        @if ($item->status_pembayaran == 'Sudah Dibayar')
+                        @if ($item->status_pembayaran == 'capture')
                             <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-success">{{ $item->status_pembayaran }}</span></td>
                         @else
                             <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-danger">{{ $item->status_pembayaran }}</span></td>
@@ -54,16 +54,16 @@
                         @if ( $odItem->order_id == $item->id && $odItem->product )
                         <tr>
                             <td>{{ $odItem->product->name }}</td>
-                        </tr>           
+                        </tr>
                         <tr>
                             <td>{{ $odItem->qty }}</td><td>{{ $odItem->product->price }}</td><td></td><td>{{ $odItem->subtotal }}</td>
-                        </tr>      
+                        </tr>
                         @endif
                     @endforeach
                     <td colspan="4">------------------------------------------------------------------------</td>
                     <tr>
                         <td></td><td>Total</td><td>:</td><td>{{ $item->total_price }}</td>
-                    </tr> 
+                    </tr>
                 </table>
             </div>
         </div>
