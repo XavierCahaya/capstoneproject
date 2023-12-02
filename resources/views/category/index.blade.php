@@ -6,7 +6,7 @@
         <div class="hstack gap-3 justify-content-center">
             @foreach ($categories as $category)
             <div class="bg-light border my-4" style="border-radius: 20px;">
-                <div class="card-product card" style="width: 15rem; border-radius:20px;">
+                <div class="card-product card" style="width: 12rem; border-radius:20px;">
                     <img src="/image/food.webp" class="card-img-top img-fluid" style="border-radius:20px 20px 0 0;" alt="...">
                     <div class="card-body">
                         <p class="card-text text-center" style="font-size: 15px">{{ $category->name }}</p>
