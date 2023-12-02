@@ -7,13 +7,13 @@
         <section class="home" id="home" style="background-image: url('{{ asset('image/Background.png') }}');">
             <div class="content">
                 <div class="text-section">
-                    <h3 class="welcome-text">Welcome</h3>
-                    <h3 class="to-text">to</h3>
+                    <h3 class="welcome-text">Selamat Datang</h3>
+                    <h3 class="to-text">di</h3>
                     <h3 class="njajaners-text">N'JAJANERS</h3>
                     <p>A place where deliciousness meets comfort! Discover a unique culinary experience with a selection
                         of delicious noodles, fresh juices, and savory snacks. Immediately try the deliciousness we
                         offer!</p>
-                    <a href="{{ route('product') }}" class="btn order-btn">Order now</a>
+                    <a href="{{ route('product') }}" class="btn order-btn">Pesan</a>
                 </div>
 
                 <div class="logo-section">
