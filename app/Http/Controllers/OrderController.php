@@ -51,7 +51,6 @@ class OrderController extends Controller
         $address = null;
 
         if ($deliveryOption == 'delivery') {
-            // Jika 'delivery-option' adalah 'delivery', isi 'phone' dan 'address' dari request
             $phone = $request->input('phone');
             $address = $request->input('address');
         }
@@ -73,7 +72,6 @@ class OrderController extends Controller
             ),
             'callbacks' => [
                 'finish' => "http://127.0.0.1:8000/webhooks/midtrans",
-                // 'finish' => "https://9ebc-114-122-75-174.ngrok-free.app/api/webhooks/midtrans",
             ]
         );
 
@@ -88,6 +86,16 @@ class OrderController extends Controller
                 'payment_option' => $request->input('payment_option'),
                 'status_pembayaran' => $statusPembayaran,
             ]);
+
+            $orderDetails = $this->createOrderDetails(
+                $order->id,
+                $arrayId,
+                $arrayName,
+                $arrayQty,
+                $arraySubtotal
+            );
+
+            $order->orderDetails()->saveMany($orderDetails);
 
             return redirect()->route('product')->with('message', 'Pemesanan Berhasil, silahkan cek pesanan anda pada halaman "Cek Pesanan"');
         }
@@ -126,7 +134,6 @@ class OrderController extends Controller
         );
 
         $order->orderDetails()->saveMany($orderDetails);
-
 
         return redirect()->away($response->redirect_url);
 
