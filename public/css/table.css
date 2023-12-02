@@ -1,0 +1,39 @@
+.modalTable{
+    max-width: 365px;
+}
+
+.tableSmall{
+    border-top: 3px solid black;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.appear-on-small {
+    display: none
+}
+
+
+@media (max-width: 769px) {
+    .hide-on-medium {
+        display: none;
+    }
+    .appear-on-small {
+        display: none
+    }
+
+    strong{
+        margin-right: 5px;
+    }
+}
+
+@media (max-width: 426px) {
+    .hide-on-medium {
+        display: none;
+    }
+    .hide-on-small {
+        display: none;
+    }
+    .appear-on-small {
+        display: block
+    }   
+}
