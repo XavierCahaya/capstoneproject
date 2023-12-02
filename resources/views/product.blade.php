@@ -2,22 +2,18 @@
 
 @section('container')
     @if (session('message'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('message') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @elseif (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
     <div id="promo" class="carousel slide mx-auto mb-3" data-bs-ride="carousel">
         <div class="carousel-inner text-center">
             @foreach ($promos as $key => $promo)
-                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    @if ($promo->image)
+                <div class="carousel-item {{ $key == 0 ? 'active':'' }}">
+                    @if($promo->image)
                         <img src="{{ asset('images/promo/' . $promo->image) }}" class="d-block w-100" alt="Promo Image">
                     @endif
-                </div>
+                </div>  
             @endforeach
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#promo" data-bs-slide="prev">
@@ -50,24 +46,25 @@
                 @forelse ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-8 my-2 d-flex justify-content-center">
                         <div class="card-product card">
-                            <img src="{{ asset('images/product/' . $product->image) }}" class="card-img-top img-fluid"
-                                alt="ProdukImage">
+                            <img src="{{ asset('images/product/'. $product->image) }}" class="card-img-top img-fluid" alt="ProdukImage">
                             <div class="card-body p-2">
                                 <div class="d-flex midleinfo">
                                     <h5 class="card-title p-2">Rp
                                         {{ number_format($product->price, 0, ',', '.') }}</h5>
-                                    <h6 class="card-title" style="background-color:#D4DF52; border-radius:10px;">
+                                    <h6 class="card-title"
+                                        style="background-color:#D4DF52; border-radius:10px;">
                                         {{ $product->category->name }}</h6>
                                 </div>
                                 <p class="card-text text-center" style="font-size: 15px">{{ $product->name }}</p>
                                 <div class="card-btn d-flex justify-content-between align-items-center">
-                                    <button type="button" class="btn btn-primary btn-detail"
-                                        style="background-color:#1f7fd8; border-radius:10px; font-size:.8em;"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}"
-                                        data-product-description="{{ $product->description }}"
-                                        data-product-image="{{ asset('images/product/' . $product->image) }}"
-                                        data-product-price="{{ $product->price }}">
+                                    <button type="button" class="btn btn-primary btn-detail" style="background-color:#1f7fd8; border-radius:10px; font-size:.8em;" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#exampleModal" 
+                                    data-product-id="{{ $product->id }}" 
+                                    data-product-name="{{ $product->name }}" 
+                                    data-product-description="{{ $product->description }}" 
+                                    data-product-image="{{ asset('images/product/'. $product->image) }}" 
+                                    data-product-price="{{ $product->price }}">
                                         Lihat Detail
                                     </button>
 
@@ -76,15 +73,13 @@
                                         style="background-color:#0cc22a; border-radius:10px; font-size:1em;">Pesan</a>
                                 </div>
 
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header" style="background: #FC3E24;">
                                                 <div class="row w-100">
                                                     <div class="col-6">
-                                                        <div class="modal-title fs-5 text-start text-light"
-                                                            id="exampleModalLabel">
+                                                        <div class="modal-title fs-5 text-start text-light" id="exampleModalLabel">
                                                             <p id="product-name" style="padding-left:16px; margin:0;"></p>
                                                         </div>
                                                     </div>
@@ -99,26 +94,24 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-6 text-center">
-                                                        <img src="{{ asset('images/product/' . $product->image) }}"
-                                                            id="product-image" class="img-fluid">
+                                                        <img src="{{ asset('images/product/'. $product->image) }}" id="product-image" class="img-fluid">
                                                     </div>
                                                     <div class="col-md-6 mt-2">
                                                         <p id="product-description"></p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                        
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Kembali</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>    
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+                                     
                             </div>
                         </div>
-                    </div>
-                @empty
+                    </div>   
+                    @empty
                 @endforelse
             </div>
         </div>
@@ -156,7 +149,7 @@
                         <option value="dine-in">Dine In</option>
                         <option value="delivery">Delivery</option>
                     </select>
-                </div>
+                </div>  
 
                 <div class="mb-3">
                     <label for="orderer_name" class="form-label">Nama Pemesan</label>
@@ -188,14 +181,12 @@
                 <input type="hidden" name="array_qty" id="array_qty" value="">
                 <input type="hidden" name="array_subtotal" id="array_subtotal" value="">
 
-                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Checkout</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 Apakah Anda yakin ingin melakukan checkout? <br>
@@ -209,8 +200,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success mb-4" id="checkout-btn" data-bs-toggle="modal"
-                    data-bs-target="#confirmationModal" disabled>Checkout</button>
+                <button type="submit" class="btn btn-success mb-4" id="checkout-btn" data-bs-toggle="modal" data-bs-target="#confirmationModal" disabled>Checkout</button>
             </form>
         </div>
     </div>
@@ -218,11 +208,11 @@
     <script>
         let modalConfirmed = false;
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
 
-            document.querySelectorAll('.btn-detail').forEach(function(button) {
-                button.addEventListener('click', function() {
+            document.querySelectorAll('.btn-detail').forEach(function (button) {
+                button.addEventListener('click', function () {
                     let productId = this.getAttribute('data-product-id');
                     let name = this.getAttribute('data-product-name');
                     let description = this.getAttribute('data-product-description');
@@ -242,11 +232,11 @@
             });
         });
 
-
+        
         // --- Logic Tampilan Pilihan Opsi Pemesanan ---
         document.addEventListener('DOMContentLoaded', function() {
             let deliveryOption = document.getElementById('delivery_option');
-            let deliveryFields = document.getElementById('delivery-fields');
+            let deliveryFields = document.getElementById('delivery-fields');    
             let phone = document.getElementById('phone');
             let address = document.getElementById('address');
 
@@ -256,7 +246,7 @@
                     deliveryFields.style.display = 'block';
                     phone.required = true;
                     address.required = true;
-                } else {
+                }else{
                     deliveryFields.style.display = 'none';
                     phone.required = false;
                     address.required = false;
@@ -280,7 +270,7 @@
                     let qty = 1;
                     let amount = productPrice * qty;
 
-                    // --- Logic ketika ada item yg sama pada cart,
+                    // --- Logic ketika ada item yg sama pada cart, 
                     // Jika ada item yang sama maka tambah quantity ---
                     let existingRow = tableBody.querySelector(`tr[data-product-id="${productId}"]`);
                     if (existingRow) {
@@ -294,8 +284,8 @@
                             'id-ID', {
                                 minimumFractionDigits: 2
                             });
-
-                        // Jika tidak ada, maka tambah row baru ke cart
+                    
+                    // Jika tidak ada, maka tambah row baru ke cart
                     } else {
                         let newRow = `
                         <tr data-product-id="${productId}" data-product-price="${productPrice}">
@@ -366,12 +356,12 @@
                     }
                 }
                 updateTotal();
-                updateCheckoutButtonStatus()
+                updateCheckoutButtonStatus();
                 prepareFormData();
             });
 
-            function updateTotal() {
-                let totalInput = document.getElementById('total_price');
+            function updateTotal() {                
+                let totalInput = document.getElementById('total_price');    
                 let totalElements = document.querySelectorAll('.total');
                 let grandTotal = Array.from(totalElements).reduce(function(accumulator, element) {
                     return accumulator + parseFloat(element.textContent);
@@ -389,7 +379,7 @@
 
                 // Ambil data dari setiap baris pada keranjang
                 let rows = document.querySelectorAll('#cartTable tbody tr');
-
+                console.log(rows);
                 rows.forEach(function(row) {
                     let productId = row.getAttribute('data-product-id');
                     let productName = row.querySelector('td:nth-child(2)').innerText;
@@ -416,25 +406,24 @@
             }
 
             let confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-            document.getElementById('checkout-btn').addEventListener('click', function(event) {
+            document.getElementById('checkout-btn').addEventListener('click', function (event) {
                 event.preventDefault();
                 confirmationModal.show();
 
-                document.getElementById('confirmCheckout').addEventListener('click', function() {
+                document.getElementById('confirmCheckout').addEventListener('click', function () {
                     modalConfirmed = true;
                     confirmationModal.hide();
                     document.getElementById('checkout-form').submit();
                 });
 
                 // Menanggapi penutupan modal
-                confirmationModal._element.addEventListener('hidden.bs.modal', function() {
+                confirmationModal._element.addEventListener('hidden.bs.modal', function () {
                     modalConfirmed = false;
                     updateCheckoutButtonStatus();
                 });
 
                 // Menanggapi penutupan modal tanpa konfirmasi
-                document.getElementById('confirmationModal').addEventListener('hide.bs.modal', function(
-                    event) {
+                document.getElementById('confirmationModal').addEventListener('hide.bs.modal', function (event) {
                     if (!modalConfirmed) {
                         modalConfirmed = false;
                         // Kembalikan status tombol Checkout
@@ -448,8 +437,8 @@
                 return tableBody.children.length === 0;
             }
 
-            document.addEventListener('input', function() {
-                updateCheckoutButtonStatus();
+            document.addEventListener('input', function () {
+            updateCheckoutButtonStatus();
             });
 
             function updateCheckoutButtonStatus() {
@@ -465,6 +454,8 @@
                 if (document.getElementById('delivery_option').value === 'delivery') {
                     isFormValid = isFormValid && phoneInput.value.trim() !== '' && addressInput.value.trim() !== '';
                 }
+                console.log(!isFormValid);
+                console.log(isCartEmptyFlag);
 
                 document.getElementById('checkout-btn').disabled = !isFormValid;
                 document.getElementById('checkout-btn').disabled = !isFormValid || isCartEmptyFlag;
