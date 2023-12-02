@@ -1,7 +1,7 @@
 @foreach ( $order as $item )
 <div class="modal fade" id="staticBackdropView{{ $item->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">>
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content modalTable">
             <div class="modal-header">
                 <h5 class="modal-title">Pemesanan Detail</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -13,7 +13,7 @@
                 </div>
                 <h5 class="mt-4 my-2">Tanggal : {{ $item->created_at }}</h5>
                 <table>
-                    <td colspan="4">------------------------------------------------------------------------</td>
+                    <td class="text-center" colspan="4">-----------------------------------------</td>
                     <tr>
                         <td>Nama</td><td>:</td><td>{{ $item->orderer_name }}</td>
                     </tr>
@@ -33,36 +33,36 @@
                     </tr>
                     <tr>
                         @if ($item->status_pembayaran == 'Sudah Dibayar')
-                            <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-success">{{ $item->status_pembayaran }}</span></td>
+                            <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-success py-2">{{ $item->status_pembayaran }}</span></td>
                         @else
-                            <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-danger">{{ $item->status_pembayaran }}</span></td>
+                            <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-danger py-2">{{ $item->status_pembayaran }}</span></td>
                         @endif
                     </tr>
                     <tr>
                         @if ($item->status == 'Menunggu Diproses')
-                            <td>Status Pemesanan</td><td>:</td><td><span class="badge text-bg-warning">{{ $item->status }}</span></td>
+                            <td>Status Pemesanan</td><td>:</td><td><span class="badge text-bg-warning py-2">{{ $item->status }}</span></td>
                         @elseif ($item->status == 'Sedang Diproses')
-                            <td>Status Pemesanan</td><td>:</td><td><span class="badge text-bg-info">{{ $item->status }}</span></td>
+                            <td>Status Pemesanan</td><td>:</td><td><span class="badge text-bg-info py-2">{{ $item->status }}</span></td>
                         @elseif ($item->status == 'Selesai')
-                        1   <td>Status Pemesanan</td><td>:</td><td><span class="badge text-bg-success">{{ $item->status }}</span></td>
+                        1   <td>Status Pemesanan</td><td>:</td><td><span class="badge text-bg-success py-2">{{ $item->status }}</span></td>
                         @else
-                            <td>Status Pemesanan</td><td>:</td><td><span class="badge text-bg-secondary">{{ $item->status }}</span></td>
+                            <td>Status Pemesanan</td><td>:</td><td><span class="badge text-bg-secondary py-2">{{ $item->status }}</span></td>
                         @endif
                     </tr>
-                    <td colspan="4">------------------------------------------------------------------------</td>
+                    <td class="text-center" colspan="4">-----------------------------------------</td>
                     @foreach ( $orderDetail as $odItem)
                         @if ( $odItem->order_id == $item->id && $odItem->product )
                         <tr>
                             <td>{{ $odItem->product->name }}</td>
                         </tr>           
                         <tr>
-                            <td>{{ $odItem->qty }}</td><td>{{ $odItem->product->price }}</td><td></td><td>{{ $odItem->subtotal }}</td>
+                            <td>{{ $odItem->qty }}</td><td>{{ number_format($odItem->product->price, 0, ',', '.') }}</td><td class="d-flex justify-content-end">{{ number_format($odItem->subtotal, 0, ',', '.') }}</td>
                         </tr>      
                         @endif
                     @endforeach
-                    <td colspan="4">------------------------------------------------------------------------</td>
+                    <td class="text-center" colspan="4">-----------------------------------------</td>
                     <tr>
-                        <td></td><td>Total</td><td>:</td><td>{{ $item->total_price }}</td>
+                        <td></td><td>Total :</td><td class="d-flex justify-content-end">Rp {{ number_format($item->total_price, 2, ',', '.') }}</td>
                     </tr> 
                 </table>
             </div>
