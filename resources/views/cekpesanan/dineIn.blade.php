@@ -26,15 +26,15 @@
             <td class="hide-on-medium">{{ $od->phone  ?: '-' }}</td>
             <td class="hide-on-medium">{{ $od->address  ?: '-' }}</td>
             <td class="hide-on-small">{{ $od->getTotalItemsAttribute() }}</td>
-            <td>
+            <td class="hide-on-small"
                 @if ($od->status == 'Menunggu Diproses')
-                    <span class="badge text-bg-warning">{{ $od->status }}</span>
+                    <span class="badge text-bg-warning py-2">{{ $od->status }}</span>
                 @elseif ($od->status == 'Sedang Diproses')
-                    <span class="badge text-bg-info">{{ $od->status }}</span>
+                    <span class="badge text-bg-info py-2">{{ $od->status }}</span>
                 @elseif ($od->status == 'Selesai')
-                    <span class="badge text-bg-success">{{ $od->status }}</span>
+                    <span class="badge text-bg-success py-2">{{ $od->status }}</span>
                 @else
-                    <span class="badge text-bg-secondary">{{ $od->status }}</span>
+                    <span class="badge text-bg-secondary py-2">{{ $od->status }}</span>
                 @endif
             </td>
             <td class="hide-on-small">

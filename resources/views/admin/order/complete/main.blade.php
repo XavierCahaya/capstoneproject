@@ -7,15 +7,24 @@
     <div class="content-tabs">
         <ul class="nav nav-pills justify-content-center">
             <li class="nav-item mx-3 mb-3">
-                <a class="nav-link" href="{{ route('orderComplete.delivery') }}">Delivery</a>
+                <a class="nav-link {{ request()->is('cms/order/sub-orderComplete/OrderComplete/semua') ? 'active' : '' }}" href="{{ route('orderComplete') }}">Semua</a>
             </li>
             <li class="nav-item mx-3 mb-3">
-                <a class="nav-link" href="{{ route('orderComplete.dineIn') }}">Dine-in</a>
+                <a class="nav-link {{ request()->is('cms/order/sub-orderComplete/OrderComplete/dineIn') ? 'active' : '' }}" href="{{ route('orderComplete.dineIn') }}">Dine-in</a>
             </li>
             <li class="nav-item mx-3 mb-3">
-                <a class="nav-link" href="{{ route('orderComplete') }}">Semua</a>
+                <a class="nav-link {{ request()->is('cms/order/sub-orderComplete/OrderComplete/delivery') ? 'active' : '' }}" href="{{ route('orderComplete.delivery') }}">Delivery</a>
             </li>
         </ul>
+    </div>
+    <div class="d-flex text-center align-items-center justify-content-start mb-2">
+        <a href="{{ route('orderProcess') }}" class="inLink p-2 text-light rounded d-flex align-items-center" style="a:target-new:tab;background-color: rgb(227, 176, 7)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+                <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+            </svg>
+            Menuju Pesanan Diproses
+        </a>
     </div>
     <div class="card">
         <div class="card-body">

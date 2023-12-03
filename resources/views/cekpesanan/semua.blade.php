@@ -6,14 +6,14 @@
     <thead class="table-dark">
         <tr>
             <th class="text-center hide-on-small">No</th>
-            <th class="hide-on-small">Tanggal Masuk</th>
-            <th class="hide-on-small">Opsi Pemesanan</th>
-            <th class="hide-on-small">Nama Pemesan</th>
-            <th class="hide-on-medium">Nomer Telepon</th>
-            <th class="hide-on-medium">Alamat</th>
-            <th class="hide-on-small">Jumlah Pesanan</th>
-            <th class="hide-on-small">Status Pesanan</th>
-            <th class="hide-on-small">Aksi</th>
+            <th class="text-center hide-on-small">Tanggal Masuk</th>
+            <th class="text-center hide-on-small">Opsi Pemesanan</th>
+            <th class="text-center hide-on-small">Nama Pemesan</th>
+            <th class="text-center hide-on-medium">Nomer Telepon</th>
+            <th class="text-center hide-on-medium">Alamat</th>
+            <th class="text-center hide-on-small">Jumlah Pesanan</th>
+            <th class="text-center hide-on-small">Status Pesanan</th>
+            <th class="text-center hide-on-small">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -21,12 +21,12 @@
         <tr>
             <td class="text-center hide-on-small">{{ $index + 1 }}</td>
             <td class="hide-on-small">{{ $od->created_at }}</td>
-            <td class="hide-on-small">{{ $od->delivery_option }}</td>
-            <td class="hide-on-small">{{ $od->orderer_name }}</td>
-            <td class="hide-on-medium">{{ $od->phone  ?: '-' }}</td>
+            <td class="text-center hide-on-small">{{ $od->delivery_option }}</td>
+            <td class="text-center hide-on-small">{{ $od->orderer_name }}</td>
+            <td class="text-center hide-on-medium">{{ $od->phone  ?: '-' }}</td>
             <td class="hide-on-medium">{{ $od->address  ?: '-' }}</td>
-            <td class="hide-on-small text-center">{{ $od->getTotalItemsAttribute() }}</td>
-            <td class="hide-on-small">
+            <td class="text-center hide-on-small">{{ $od->getTotalItemsAttribute() }}</td>
+            <td class="hide-on-small text-center">
                 @if ($od->status == 'Menunggu Diproses')
                     <span class="badge text-bg-warning py-2">{{ $od->status }}</span>
                 @elseif ($od->status == 'Sedang Diproses')
@@ -37,8 +37,8 @@
                     <span class="badge text-bg-secondary py-2">{{ $od->status }}</span>
                 @endif
             </td>
-            <td class="hide-on-small">
-                <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"">  
+            <td class="hide-on-small text-center">
+                <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}">  
                     <i class="ri-file-list-fill"></i>              
                 </a>
             </td>
