@@ -10,9 +10,8 @@
                     <h3 class="welcome-text">Selamat Datang</h3>
                     <h3 class="to-text">di</h3>
                     <h3 class="njajaners-text">N'JAJANERS</h3>
-                    <p>A place where deliciousness meets comfort! Discover a unique culinary experience with a selection
-                        of delicious noodles, fresh juices, and savory snacks. Immediately try the deliciousness we
-                        offer!</p>
+                    <p>
+                        "Tempat di mana kelezatan bertemu kenyamanan! Temukan pengalaman kuliner yang unik dengan pilihan makanan yang lezat, dan minuman yang segar. Segera coba kelezatan yang kami tawarkan!"</p>
                     <a href="{{ route('product') }}" class="btn order-btn">Pesan</a>
                 </div>
 
