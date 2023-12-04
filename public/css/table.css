@@ -30,6 +30,7 @@ td{
     }
 }
 
+
 @media (max-width: 426px) {
     .hide-on-medium {
         display: none;
@@ -49,5 +50,8 @@ td{
     .smlInBtn{
         flex-direction: column;
         font-size: 14px;
+    }
+    .incomeBtn{
+        flex-direction: column;
     }
 }

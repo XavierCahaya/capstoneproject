@@ -13,21 +13,33 @@ class AdminLaporanKeuangan extends Controller
 
     public function index(Request $request)
     {
-        // Fetch only the orders with the "Selesai" status
-        $income_data = Order::where('status', 'Selesai')->get();
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        // Fetch orders with "Selesai" status and apply date range if provided
+        $query = Order::where('status', 'Selesai');
+
+        if ($start_date && $end_date) {
+            $query->whereDate('updated_at', '>=', $start_date)
+            ->whereDate('updated_at', '<=', $end_date);
+        }
+
+        $income_data = $query->get();
 
         return view('admin.laporan_keuangan.index', compact('income_data'));
     }
 
     public function export(Request $request)
     {
-        $export_date = $request->input('export_date');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
 
+        // Fetch orders with "Selesai" status and apply date range if provided
         $query = Order::where('status', 'Selesai');
 
-        if ($export_date) {
-            // Add a filter for the selected date
-            $query->whereDate('updated_at', $export_date);
+        if ($start_date && $end_date) {
+            $query->whereDate('updated_at', '>=', $start_date)
+            ->whereDate('updated_at', '<=', $end_date);
         }
 
         $income_data = $query->get();

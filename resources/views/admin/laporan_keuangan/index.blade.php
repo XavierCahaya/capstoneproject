@@ -5,78 +5,97 @@
         <div class="mb-3 mb-md-0">
             <h1 class="mb-1 h2 fw-bold text-center">Data Pemasukan</h1>
         </div>
-        <div>
-            <form action="{{ route('exportlaporan') }}" method="get" class="mb-2">
-                <div class="row g-2 align-items-center mt-4">
+        <div class="incomeBtn d-flex justify-content-between">
+            <form action="{{ route('laporankeuangan') }}" method="get" class="mb-2">
+                <div class="incomeBtn row g-2 mt-3">
                     <div class="col-auto">
-                        <label for="export_date" class="col-form-label">Pilih Tanggal:</label>
+                        <label for="start_date" class="col-form-label">Mulai :</label>
                     </div>
                     <div class="col-auto">
-                        <input type="date" name="export_date" id="export_date" class="form-control">
+                        <input type="date" name="start_date" id="start_date" class="form-control">
+                    </div>
+                    <div class="col-auto">
+                        <label for="end_date" class="col-form-label">Sampai :</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" name="end_date" id="end_date" class="form-control">
                     </div>
                     <div class="col-auto ms-auto">
-                        <button type="submit" class="btn btn-primary">Export Data</button>
+                        <button type="submit" class="btn btn-primary">Filter Data</button>
                     </div>
+                </div>
+            </form>
+            <form action="{{ route('exportlaporan') }}" method="get" class="mt-0">
+                <div class="row g-2 mt-4">
+                    <button type="submit" class="btn btn-primary mt-0">Export Data</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-12 mt-4">
+    <div class="row" >
+        <div class="col-lg-12 col-md-12 col-12 mt-2">
+            <div class="appear-on-small p-2" style="background-color: aquamarine">
+                <p class="appear-on-small d-flex justify-content-center align-items-center m-0 p-2 text-center"><strong>Total Pemasukan:</strong>Rp. <span id="totalIncomeDisplay"></span>,00</p>
+            </div>
             <div class="card mb-4">
                 <div class="table-responsive border-0 overflow-y-hidden">
                     <table class="table mb-0 text-nowrap table-centered table-hover table-with-checkbox text-center"
                         id="datatable" style="width: 100%">
                         <thead class="table-light">
                             <tr>
-                                <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Metode Pemesanan</th>
-                                <th>Nama Pemesan</th>
-                                <th>status</th>
-                                <th>Total Pembayaran</th>
+                                <th class="hide-on-small">No</th>
+                                <th class="hide-on-small">Tanggal</th>
+                                <th class="hide-on-small">Pemesanan</th>
+                                <th class="hide-on-small">Pembayaran</th>
+                                <th class="hide-on-small">Nama Pemesan</th>
+                                <th class="hide-on-small">Total Pembayaran</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
                             @php
                                 $total_income = 0;
                             @endphp
 
                             @foreach ($income_data as $income)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>
+                                    <td class="hide-on-small">{{ $loop->iteration }}</td>
+                                    <td class="hide-on-small">
                                         {{ $income->updated_at }}
                                     </td>
-                                    <td>
+                                    <td class="hide-on-small">
                                         {{ $income->delivery_option }}
                                     </td>
-                                    <td>
+                                    <td class="hide-on-small">
+                                        {{ $income->payment_option }}
+                                    </td>
+                                    <td class="hide-on-small">
                                         {{ $income->orderer_name }}
                                     </td>
-                                    <td>
-                                        {{ $income->status }}
-                                    </td>
-                                    <td>
+                                    <td class="hide-on-small">
                                         Rp. {{ number_format($income->total_price, 0, '.', '.') }}
                                     </td>
                                 </tr>
-
+                                <div class="tableSmall appear-on-small">
+                                    <p class="appear-on-small text-center"><strong>{{ $loop->iteration }}</strong></p>
+                                    <p class="appear-on-small"><strong>Tanggal: </strong>{{ $income->updated_at }}</p>
+                                    <p class="appear-on-small"><strong>Metode Pemesanan: </strong>{{ $income->delivery_option }}</p>
+                                    <p class="appear-on-small"><strong>Metode Pembayaran: </strong> {{ $income->payment_option }}</p>
+                                    <p class="appear-on-small"><strong>Nama Pemesan: </strong>{{ $income->orderer_name }}</p>
+                                    <p class="appear-on-small"><strong>Total Pembayaran: </strong>Rp. {{ number_format($income->total_price, 0, '.', '.') }}</p>
+                                </div>
                                 @php
                                     $total_income += $income->total_price;
                                 @endphp
                             @endforeach
                         </tbody>
 
-                        <!-- Display Total Income at the end of the table -->
                         <tfoot>
                             <tr>
-                                <td colspan="3x "></td>
-                                <td>Total Pemasukan :</td>
-                                <td>Rp. {{ number_format($total_income, 0, '.', '.') }}</td>
+                                <td colspan="4x"  class="hide-on-small"></td>
+                                <td class="hide-on-small" style="background-color: aquamarine"><strong>Total Pemasukan :</strong></td>
+                                <td class="hide-on-small" style="background-color: aquamarine"><strong>Rp. {{ number_format($total_income, 0, '.', '.') }}</strong></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -84,4 +103,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var totalIncomeForDisplay = {{ $total_income }};
+        document.getElementById('totalIncomeDisplay').textContent = totalIncomeForDisplay.toLocaleString('id-ID');
+    </script>
 @endsection
