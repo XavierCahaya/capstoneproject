@@ -9,10 +9,10 @@
                 <div class="text-section">
                     <h3 class="welcome-text">Selamat Datang</h3>
                     <h3 class="to-text">di</h3>
-                    <h3 class="njajaners-text">N'JAJANERS</h3>
+                    <h3 class="njajaners-text">N'JAJAN</h3>
                     <p>
                         "Tempat di mana kelezatan bertemu kenyamanan! Temukan pengalaman kuliner yang unik dengan pilihan makanan yang lezat, dan minuman yang segar. Segera coba kelezatan yang kami tawarkan!"</p>
-                    <a href="{{ route('product') }}" class="btn order-btn">Pesan</a>
+                    <a href="{{ route('product') }}" class="btn order-btn py-4 px-5 ">Pesan Sekarang!</a>
                 </div>
 
                 <div class="logo-section">
