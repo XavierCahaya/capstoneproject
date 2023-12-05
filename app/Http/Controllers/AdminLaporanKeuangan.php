@@ -21,7 +21,7 @@ class AdminLaporanKeuangan extends Controller
 
         if ($start_date && $end_date) {
             $query->whereDate('updated_at', '>=', $start_date)
-            ->whereDate('updated_at', '<=', $end_date);
+                ->whereDate('updated_at', '<=', $end_date);
         }
 
         $income_data = $query->get();
@@ -31,15 +31,15 @@ class AdminLaporanKeuangan extends Controller
 
     public function export(Request $request)
     {
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
+        $start_date = $request->input('export_start_date');
+        $end_date = $request->input('export_end_date');
 
         // Fetch orders with "Selesai" status and apply date range if provided
         $query = Order::where('status', 'Selesai');
 
         if ($start_date && $end_date) {
             $query->whereDate('updated_at', '>=', $start_date)
-            ->whereDate('updated_at', '<=', $end_date);
+                ->whereDate('updated_at', '<=', $end_date);
         }
 
         $income_data = $query->get();

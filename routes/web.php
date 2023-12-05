@@ -109,7 +109,7 @@ Route::middleware(['web', 'auth', 'role:admin'])->group(function () {
         });
 
         Route::get('/laporan-keuangan', [AdminLaporanKeuangan::class, 'index'])->name('laporankeuangan');
-        Route::get('/export', [AdminLaporanKeuangan::class, 'export'])->name('exportlaporan');
+        Route::get('/export-laporan', [AdminLaporanKeuangan::class, 'export'])->name('exportlaporan');
 
     });
 
