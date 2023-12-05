@@ -5,6 +5,10 @@
     <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('message') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    @elseif (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
     <div id="promo" class="carousel slide mx-auto mb-3" data-bs-ride="carousel">
         <div class="carousel-inner text-center">
@@ -13,7 +17,7 @@
                     @if($promo->image)
                         <img src="{{ asset('images/promo/' . $promo->image) }}" class="d-block w-100" alt="Promo Image">
                     @endif
-                </div>  
+                </div>
             @endforeach
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#promo" data-bs-slide="prev">
@@ -57,13 +61,13 @@
                                 </div>
                                 <p class="card-text text-center" style="font-size: 15px">{{ $product->name }}</p>
                                 <div class="card-btn d-flex justify-content-between align-items-center">
-                                    <button type="button" class="btn btn-primary btn-detail" style="background-color:#1f7fd8; border-radius:10px; font-size:.8em;" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#exampleModal" 
-                                    data-product-id="{{ $product->id }}" 
-                                    data-product-name="{{ $product->name }}" 
-                                    data-product-description="{{ $product->description }}" 
-                                    data-product-image="{{ asset('images/product/'. $product->image) }}" 
+                                    <button type="button" class="btn btn-primary btn-detail" style="background-color:#1f7fd8; border-radius:10px; font-size:.8em;"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                    data-product-id="{{ $product->id }}"
+                                    data-product-name="{{ $product->name }}"
+                                    data-product-description="{{ $product->description }}"
+                                    data-product-image="{{ asset('images/product/'. $product->image) }}"
                                     data-product-price="{{ $product->price }}">
                                         Lihat Detail
                                     </button>
@@ -100,17 +104,17 @@
                                                         <p id="product-description"></p>
                                                     </div>
                                                 </div>
-                                            </div>                                        
+                                            </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>    
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                     
+
                             </div>
                         </div>
-                    </div>   
+                    </div>
                     @empty
                 @endforelse
             </div>
@@ -149,7 +153,7 @@
                         <option value="dine-in">Dine In</option>
                         <option value="delivery">Delivery</option>
                     </select>
-                </div>  
+                </div>
 
                 <div class="mb-3">
                     <label for="orderer_name" class="form-label">Nama Pemesan</label>
@@ -232,11 +236,11 @@
             });
         });
 
-        
+
         // --- Logic Tampilan Pilihan Opsi Pemesanan ---
         document.addEventListener('DOMContentLoaded', function() {
             let deliveryOption = document.getElementById('delivery_option');
-            let deliveryFields = document.getElementById('delivery-fields');    
+            let deliveryFields = document.getElementById('delivery-fields');
             let phone = document.getElementById('phone');
             let address = document.getElementById('address');
 
@@ -270,7 +274,7 @@
                     let qty = 1;
                     let amount = productPrice * qty;
 
-                    // --- Logic ketika ada item yg sama pada cart, 
+                    // --- Logic ketika ada item yg sama pada cart,
                     // Jika ada item yang sama maka tambah quantity ---
                     let existingRow = tableBody.querySelector(`tr[data-product-id="${productId}"]`);
                     if (existingRow) {
@@ -284,7 +288,7 @@
                             'id-ID', {
                                 minimumFractionDigits: 2
                             });
-                    
+
                     // Jika tidak ada, maka tambah row baru ke cart
                     } else {
                         let newRow = `
@@ -360,8 +364,8 @@
                 prepareFormData();
             });
 
-            function updateTotal() {                
-                let totalInput = document.getElementById('total_price');    
+            function updateTotal() {
+                let totalInput = document.getElementById('total_price');
                 let totalElements = document.querySelectorAll('.total');
                 let grandTotal = Array.from(totalElements).reduce(function(accumulator, element) {
                     return accumulator + parseFloat(element.textContent);

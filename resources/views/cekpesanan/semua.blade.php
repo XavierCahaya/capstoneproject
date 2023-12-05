@@ -38,8 +38,8 @@
                 @endif
             </td>
             <td class="hide-on-small text-center">
-                <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}">  
-                    <i class="ri-file-list-fill"></i>              
+                <a href="" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}">
+                    <i class="ri-file-list-fill"></i>
                 </a>
             </td>
         </tr>
@@ -55,14 +55,14 @@
                 @elseif ($od->status == 'Sedang Diproses')
                     <span class="badge text-bg-info py-2">{{ $od->status }}</span>
                 @elseif ($od->status == 'Selesai')
-                    <span class="badge text-bg-success py-2">{{ $od->status }}</span>	
+                    <span class="badge text-bg-success py-2">{{ $od->status }}</span>
                 @else
                     <span class="badge text-bg-secondary py-2">{{ $od->status }}</span>
                 @endif
             </p>
             <p class="appear-on-small text-center d-flex justify-content-center align-items-center">
-                <a href="" type="button" class="btn btn-warning px-4" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"">  
-                    Detail Pesanan <i class="ri-file-list-fill"></i>             
+                <a href="" type="button" class="btn btn-warning px-4" data-bs-toggle="modal" data-bs-target="#staticBackdropView{{ $od->id }}"">
+                    Detail Pesanan <i class="ri-file-list-fill"></i>
                 </a>
             </p>
         </div>

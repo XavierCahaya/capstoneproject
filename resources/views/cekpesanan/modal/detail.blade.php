@@ -32,7 +32,7 @@
                         <td>Opsi Pembayaran</td><td>:</td><td>{{ $item->payment_option }}</td>
                     </tr>
                     <tr>
-                        @if ($item->status_pembayaran == 'Sudah Dibayar')
+                        @if ($item->status_pembayaran == 'capture')
                             <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-success py-2">{{ $item->status_pembayaran }}</span></td>
                         @else
                             <td>Status Pembayaran</td><td>:</td><td><span class="badge text-bg-danger py-2">{{ $item->status_pembayaran }}</span></td>
@@ -54,19 +54,19 @@
                         @if ( $odItem->order_id == $item->id && $odItem->product )
                         <tr>
                             <td>{{ $odItem->product->name }}</td>
-                        </tr>           
+                        </tr>
                         <tr>
                             <td>{{ $odItem->qty }}</td><td>{{ number_format($odItem->product->price, 0, ',', '.') }}</td><td class="d-flex justify-content-end">{{ number_format($odItem->subtotal, 0, ',', '.') }}</td>
-                        </tr>      
+                        </tr>
                         @endif
                     @endforeach
                     <td class="text-center" colspan="4">-----------------------------------------</td>
                     <tr>
                         <td></td><td>Total :</td><td class="d-flex justify-content-end">Rp {{ number_format($item->total_price, 2, ',', '.') }}</td>
-                    </tr> 
+                    </tr>
                 </table>
             </div>
-            @if ( $item->status_pembayaran == 'Belum Dibayar' && $item->delivery_option == 'delivery' )
+            @if ( $item->status_pembayaran == 'pending' && $item->delivery_option == 'delivery' )
             <div class="modal-footer">
                 <a href="{{ route('konfirm.action', $item->id) }}" class="btn btn-success" type="submit">Konfirmasi</a>
             </div>

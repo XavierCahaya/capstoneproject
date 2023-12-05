@@ -84,7 +84,7 @@ class OrderController extends Controller
                 'address' => $address,
                 'total_price' => $totalPrice,
                 'payment_option' => $request->input('payment_option'),
-                'status_pembayaran' => $statusPembayaran,
+                'status_pembayaran' => 'pending',
             ]);
 
             $orderDetails = $this->createOrderDetails(
@@ -181,8 +181,6 @@ class OrderController extends Controller
         }
 
         $payment->save();
-
-        // dd(session('success'));
 
         return redirect()->route('product')->with('success', 'Pembayaran Berhasil, silahkan cek pesanan anda pada halaman "Cek Pesanan"');
 
