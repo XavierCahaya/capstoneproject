@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row cardCart">
         <div class="col-lg-6 mb-4">
             <div class="row row-cols-md-2 row-cols-sm-1">
                 @forelse ($products as $product)
@@ -119,7 +119,7 @@
                 @endforelse
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 cartRight">
             <div class="table-responsive">
                 <table class="table table-striped table-hover text-center" id="cartTable">
                     <thead class="thead-dark">

@@ -1,7 +1,5 @@
 <nav class="navbar sticky-top navbar-expand-lg px-3">
     <div class="container-fluid">
-
-
         <a class="navbar-brand" href="{{ route('beranda') }}">
             <img src="{{ asset('image/logo.png')}}" alt="Logo">
         </a>
